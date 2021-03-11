@@ -14,13 +14,9 @@ const Home = () => {
             CAF - Controle de Ambientes Fisicos
           </h1>
         </div>
-        <div className="home-content-options w-100 d-flex justify-content-around flex-grow-1">
-          <div className="button-content mt-5">
-            <Button className="p-4">Funcionário</Button>
-          </div>
-          <div className="button-content mt-5">
-            <Button className="p-4">Visitante</Button>
-          </div>
+        <div className="home-content-options w-100 d-flex justify-content-around align-items-center flex-grow-1 flex-wrap">
+          <Button>Funcionário</Button>
+          <Button>Visitante</Button>
         </div>
       </div>
       <div

@@ -11,22 +11,21 @@
     border-radius: 1rem;
 
     .home-content-logo {
-      height: 10rem;
-
+      height: 30.8%;
       .content-logo-image {
-        max-height: 7.5rem;
+        height: 100%;
       }
 
       .content-logo-title {
-        font-size: $font-size-sm;
+        font-size: $font-size-lg;
       }
     }
 
     .home-content-options {
-      .button-content {
-        button {
-          width: 10rem;
-        }
+      button {
+        width: 26.4%;
+        height: 40%;
+        font-size: $font-size-lg;
       }
     }
   }
