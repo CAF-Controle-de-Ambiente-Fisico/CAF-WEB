@@ -1,0 +1,64 @@
+body,
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0;
+}
+
+::selection {
+  color: $white;
+  background: $primary;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  color: $white;
+  background: $primary;
+  text-shadow: none;
+}
+
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+.wrap {
+  overflow: hidden;
+}
+
+.end-page-spacer {
+  width: 100%;
+  display: block;
+  height: 200px;
+}
+
+a {
+  text-decoration: none !important;
+
+  &,
+  i {
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $gray-900;
+}
+
+.posts-navigation {
+  margin-bottom: 3rem;
+}
+
+@include media-breakpoint-up(md) {
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.03rem;
+  }
+}

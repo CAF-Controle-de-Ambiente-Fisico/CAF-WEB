@@ -1,0 +1,44 @@
+.home {
+  height: 100vh;
+  background-color: $blue;
+  position: relative;
+
+  .home-content {
+    width: 59%;
+    height: 62vh;
+    background-color: hsla(0,0%,100%, 0.9);
+    z-index: 1;
+    border-radius: 1rem;
+
+    .home-content-logo {
+      height: 10rem;
+
+      .content-logo-image {
+        max-height: 7.5rem;
+      }
+
+      .content-logo-title {
+        font-size: $font-size-sm;
+      }
+    }
+
+    .home-content-options {
+      .button-content {
+        button {
+          width: 10rem;
+        }
+      }
+    }
+  }
+
+  .home-bg {
+    height: 70vh;
+    width: 38%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
