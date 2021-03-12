@@ -1,0 +1,14 @@
+.login {
+  height: 100vh;
+  position: relative;
+
+  .login-bg {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
