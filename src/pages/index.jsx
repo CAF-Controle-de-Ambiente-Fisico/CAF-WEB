@@ -9,7 +9,7 @@ const App = () => {
   const [kindUser, setKindUser] = useState("");
 
   return (
-    <StepWizard ref={stepWizard}>
+    <StepWizard ref={stepWizard} className="overflow-hidden">
       <Home setKindUser={setKindUser} />
       <Login kindUser={kindUser} />
     </StepWizard>
