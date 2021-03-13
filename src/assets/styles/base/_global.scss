@@ -8,28 +8,36 @@ html {
 
 input {
   border: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: hsla(0, 0%, 0%, 50%);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+  margin-bottom: .625rem;
   font-style: italic;
 }
 
 input::-moz-placeholder { /* Firefox 19+ */
   color: hsla(0, 0%, 0%, 50%);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+  margin-bottom: .625rem;
   font-style: italic;
 }
 input:-ms-input-placeholder { /* IE 10+ */
   color: hsla(0, 0%, 0%, 50%);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+  margin-bottom: .625rem;
   font-style: italic;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
   color: hsla(0, 0%, 0%, 50%);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+  margin-bottom: .625rem;
   font-style: italic;
 }
 
