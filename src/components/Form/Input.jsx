@@ -6,18 +6,24 @@ const Input = ({
   label,
   placeholder = "",
   className = "",
-  insideLabel,
+  labelClassName = "",
+  contextClassName = "",
 }) => {
   return (
-    <>
-      {label && <Form.Label>{label}</Form.Label>}
+    <div className={`input-context ${contextClassName}`}>
+      {label && (
+        <label for={name} className={labelClassName}>
+          {label}
+        </label>
+      )}
       <input
         type={type}
         placeholder={placeholder}
         name={name}
         className={className}
+        id={name}
       />
-    </>
+    </div>
   );
 };
 
