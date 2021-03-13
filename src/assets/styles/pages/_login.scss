@@ -3,10 +3,38 @@
   position: relative;
 
   .login-form {
-    .login-form-input {
+    .input-context {
+      width: 15.5625rem;
+      height: 2rem;
+      transition: .8s;
       border-bottom: 1px solid $shadow;
-      width: 50%;
+
+      .login-form-input {
+        width: 100%;
+        font-size: .8125rem;
+      }
+      
+      .login-form-label {
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        color: $primary;
+      }
+
+      &:hover {
+        width: 20.750rem;
+      }
     }
+
+    .login-form-button {
+      width: 20.750rem;
+      height: 2.75rem;
+    }
+
+    .login-form-link {
+      font-size: $font-size-sm;
+    }
+
   }
 
   .login-bg {
