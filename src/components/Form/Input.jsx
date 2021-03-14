@@ -12,7 +12,7 @@ const Input = ({
   return (
     <div className={`input-context ${contextClassName}`}>
       {label && (
-        <label for={name} className={labelClassName}>
+        <label htmlFor={name} className={labelClassName}>
           {label}
         </label>
       )}
