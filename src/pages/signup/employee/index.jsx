@@ -66,6 +66,15 @@ const Singup = () => {
           />
 
           <Input
+            name="register"
+            type="text"
+            placeholder="Digite sua matrícula"
+            contextClassName="position-relative mt-4 d-flex justify-content-center"
+            labelClassName="position-absolute signup-form-label"
+            className="signup-form-input input-password"
+          />
+
+          <Input
             name="email"
             type="email"
             placeholder="Digite seu melhor email"
