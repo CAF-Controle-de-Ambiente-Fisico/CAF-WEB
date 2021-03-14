@@ -61,14 +61,14 @@ const Login = ({ nextStep, firstStep, kindUser = "" }) => {
           </Button>
 
           <Button
-            variant="danger"
+            variant="warning"
             onClick={() => firstStep()}
             className="login-form-button  mt-3 badge badge-pill"
           >
             Voltar
           </Button>
 
-          <Link href="/">
+          <Link href={`/signup/${kindUser}`}>
             <a className="mt-3 text-center text-primary login-form-link">
               Não possui conta? <br /> Clique aqui para cadastre-se
             </a>
