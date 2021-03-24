@@ -4,7 +4,7 @@ import { Image, Button } from "react-bootstrap";
 import bgContet from "../assets/images/arte-wave.svg";
 import logo from "../assets/images/handonkey.svg";
 
-const Home = ({ nextStep, firstStep, setKindUser }) => {
+const Home = ({ nextStep, setKindUser }) => {
   return (
     <div className="home d-flex justify-content-center align-items-center bg-info">
       <div className="home-content d-flex flex-wrap flex-column p-4">
