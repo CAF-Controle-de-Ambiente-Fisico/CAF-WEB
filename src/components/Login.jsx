@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button, Form, Image } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 
 import Input from "../components/Form/Input";
 
@@ -12,8 +12,8 @@ import logo from "../assets/images/handonkey.svg";
 import user from "../assets/images/icons/user.svg";
 import password from "../assets/images/icons/password.svg";
 
-const Login = ({ nextStep, firstStep, kindUser = "" }) => {
-  const { register, handleSubmit, watch, errors } = useForm();
+const Login = ({ firstStep, kindUser = "" }) => {
+  const methods = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -30,50 +30,52 @@ const Login = ({ nextStep, firstStep, kindUser = "" }) => {
             <strong className="text-uppercase">{translate(kindUser)}</strong>
           </p>
         </div>
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-100 d-flex flex-column align-items-center flex-wrap"
-        >
-          <Input
-            name="username"
-            placeholder="Usuário ou email"
-            label={<Image className="mb-1" src={user} />}
-            contextClassName="position-relative mt-4 d-flex justify-content-center"
-            labelClassName="position-absolute login-form-label"
-            className="text-center login-form-input input-username"
-          />
-
-          <Input
-            name="password"
-            type="password"
-            placeholder="Senha"
-            label={<Image className="mb-1" src={password} />}
-            contextClassName="position-relative mt-4 d-flex justify-content-center"
-            labelClassName="position-absolute login-form-label"
-            className="text-center login-form-input input-password"
-          />
-
-          <Button
-            className="login-form-button mt-3 badge badge-pill"
-            type="submit"
+        <FormProvider {...methods}>
+          <Form
+            onSubmit={methods.handleSubmit(onSubmit)}
+            className="w-100 d-flex flex-column align-items-center flex-wrap"
           >
-            Login
-          </Button>
+            <Input
+              name="username"
+              placeholder="Usuário ou email"
+              label={<Image className="mb-1" src={user} />}
+              contextClassName="position-relative mt-4 d-flex justify-content-center"
+              labelClassName="position-absolute login-form-label"
+              className="text-center login-form-input input-username"
+            />
 
-          <Button
-            variant="warning"
-            onClick={() => firstStep()}
-            className="login-form-button  mt-3 badge badge-pill"
-          >
-            Voltar
-          </Button>
+            <Input
+              name="password"
+              type="password"
+              placeholder="Senha"
+              label={<Image className="mb-1" src={password} />}
+              contextClassName="position-relative mt-4 d-flex justify-content-center"
+              labelClassName="position-absolute login-form-label"
+              className="text-center login-form-input input-password"
+            />
 
-          <Link href={`/signup/${kindUser}`}>
-            <a className="mt-3 text-center text-primary login-form-link">
-              Não possui conta? <br /> Clique aqui para cadastre-se
-            </a>
-          </Link>
-        </Form>
+            <Button
+              className="login-form-button mt-3 badge badge-pill"
+              type="submit"
+            >
+              Login
+            </Button>
+
+            <Button
+              variant="warning"
+              onClick={() => firstStep()}
+              className="login-form-button  mt-3 badge badge-pill"
+            >
+              Voltar
+            </Button>
+
+            <Link href={`/signup/${kindUser}`}>
+              <a className="mt-3 text-center text-primary login-form-link">
+                Não possui conta? <br /> Clique aqui para cadastre-se
+              </a>
+            </Link>
+          </Form>
+        </FormProvider>
       </div>
     </div>
   );
