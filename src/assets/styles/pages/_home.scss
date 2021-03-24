@@ -11,18 +11,22 @@
 
     .home-content-logo {
       height: 30.8%;
-      
-      .content-logo-image {
-        height: 100%;
-      }
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
 
-      .content-logo-title {
-        font-size: $font-size-lg;
-      }
+    .content-logo-title {
+      font-size: $font-size-lg;
+      text-align: center;
     }
 
     .home-content-options {
+      justify-content: center;
+      align-items: center;
+
       button {
+        margin: 0 4rem;
         width: 26.4%;
         height: 40%;
         font-size: $font-size-lg;
@@ -39,5 +43,29 @@
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .home {  
+    .home-content {
+      width: 90%;
+
+      .content-logo-title {
+        font-size: $font-size-sm;
+      }
+
+      .home-content-options {
+        flex-direction: column;
+        justify-content: space-around;
+
+        button {
+          width: 9.5rem;
+          height: 3.75rem;
+          font-size: $font-size-sm;
+          margin: 0;
+        }
+      }
+    }
   }
 }
