@@ -1,0 +1,66 @@
+.confirmation {
+  position: relative;
+
+  .confirmation-content {
+    width: 59%;
+    height: 62vh;
+    background-color: hsla(0,0%,100%, 0.9);
+    z-index: 1;
+    border-radius: 1rem;
+
+    .confirmation-content-logo {
+      height: 30.8%;
+      
+      .content-logo-image {
+        height: 100%;
+      }
+
+      .content-logo-title {
+        font-size: $font-size-lg;
+      }
+    }
+
+    .confirmation-content-form {
+
+      .input-context {
+        width: 15.5625rem;
+        height: 2rem;
+        transition: .8s;
+        border-bottom: 1px solid $shadow;
+  
+        .confirmation-form-input {
+          width: 100%;
+          font-size: .8125rem;
+        }
+        
+        .confirmation-form-label {
+          bottom: 0;
+          left: 0;
+          margin: 0;
+          color: $primary;
+        }
+  
+        &:hover {
+          width: 20.750rem;
+        }
+      }
+
+      button {
+        width: 26.4%;
+        height: 40%;
+        font-size: $font-size-lg;
+      }
+    }
+  }
+
+  .confirmation-bg {
+    height: 70vh;
+    width: 38%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
