@@ -73,8 +73,12 @@ const Singup = () => {
           >
             <Image src={logo} className="ml-5" />
           </div>
-          <div className="signup-form w-50 h-100 d-flex flex-column align-items-center justify-content-center">
-            <div className="signup-form-title d-flex flex-wrap flex-column align-items-center w-100">
+          <div className="signup-form h-100 d-flex flex-column align-items-center justify-content-center">
+            <div className="signup-form-title d-flex flex-wrap flex-column justify-content-center align-items-center w-100">
+              <div
+                className="signup-form-logo"
+                style={{ backgroundImage: `url(${logo})` }}
+              ></div>
               <span className="text-primary text-capitalize">
                 Cadastro de {translate(user)}
               </span>
@@ -89,7 +93,6 @@ const Singup = () => {
                   name="username"
                   placeholder="Nome de usuário"
                   contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  labelClassName="position-absolute signup-form-label"
                   className="signup-form-input input-username"
                 />
 
@@ -99,7 +102,6 @@ const Singup = () => {
                   type="text"
                   placeholder="CPF"
                   contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  labelClassName="position-absolute signup-form-label"
                   className="signup-form-input input-password"
                 />
 
@@ -109,8 +111,25 @@ const Singup = () => {
                   required
                   placeholder="Digite seu melhor email"
                   contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  labelClassName="position-absolute signup-form-label"
                   className="signup-form-input input-username"
+                />
+
+                <Input
+                  required
+                  name="password"
+                  type="password"
+                  placeholder="Senha"
+                  contextClassName="position-relative mt-4 d-flex justify-content-center"
+                  className="signup-form-input input-password"
+                />
+
+                <Input
+                  required
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder="Digite sua senha novamente"
+                  contextClassName="position-relative mt-4 d-flex justify-content-center"
+                  className="signup-form-input input-password"
                 />
 
                 <Dropzone
