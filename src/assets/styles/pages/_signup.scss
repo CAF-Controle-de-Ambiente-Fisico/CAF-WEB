@@ -1,8 +1,9 @@
 .signup {
   height: 100vh;
-  position: relative;
 
   .signup-form {
+    width: 50%;
+
     .signup-form-title {
       font-size: 2rem;
     }
@@ -61,5 +62,45 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom left;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .signup {
+    .signup-form {
+      margin-top: 2rem;
+      width: 100%;
+
+      .signup-form-logo {
+        width: 100%;
+        height: 8.625rem;
+        background-repeat: no-repeat;
+        background-size: 5.625rem;
+        background-position: bottom center;
+      }
+
+      .signup-form-title {
+        font-size: 1rem;
+      }
+  
+      .signup-form-dropzone {
+        width: 5.7rem;
+        height: 7rem;
+      }
+  
+      .signup-form-button {
+        width: 14.750rem;
+        height: 1.75rem;
+      }
+
+      .signup-form-link {
+        font-size: $font-size-sm;
+        margin-bottom: 2rem;
+      }
+    }
+  
+    .signup-bg { 
+      display: none;
+    }
   }
 }
