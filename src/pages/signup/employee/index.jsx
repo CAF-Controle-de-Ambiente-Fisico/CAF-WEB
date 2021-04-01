@@ -13,22 +13,37 @@ import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
 
+import { api } from "../../../../service/api";
+
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
 
   const methods = useForm();
   const onSubmit = (data) => {
-    setSendEmail(data.email);
-    console.log(data);
+    // console.log(data);
+    api
+      .post("v1/employee", data, {
+        headers: {
+          Accept: "*/*",
+          "Access-Control-Request-Headers": "content-type",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setSendEmail(data.email);
+      })
+      .catch((error) => {
+        console.log("deu merda!");
+      });
   };
   const router = useRouter();
 
   const user = router.pathname.split("/")[2];
 
   useEffect(() => {
-    methods.register({ name: "avatar" });
-    methods.setValue("avatar", image);
+    methods.register({ name: "photo" });
+    methods.setValue("photo", image);
     return () => {
       URL.revokeObjectURL(image?.preview);
     };
@@ -98,7 +113,7 @@ const Singup = () => {
 
                 <Input
                   required
-                  name="register"
+                  name="registration"
                   type="text"
                   placeholder="Matrícula"
                   contextClassName="position-relative mt-4 d-flex justify-content-center"
@@ -112,24 +127,6 @@ const Singup = () => {
                   placeholder="Digite seu melhor email"
                   contextClassName="position-relative mt-4 d-flex justify-content-center"
                   className="signup-form-input input-username"
-                />
-
-                <Input
-                  required
-                  name="password"
-                  type="password"
-                  placeholder="Senha"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-password"
-                />
-
-                <Input
-                  required
-                  name="passwordConfirmation"
-                  type="password"
-                  placeholder="Digite sua senha novamente"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-password"
                 />
 
                 <Dropzone
@@ -150,7 +147,7 @@ const Singup = () => {
                     >
                       <input
                         {...getInputProps({ multiple: false })}
-                        name="avatar"
+                        name="photo"
                       />
                       <div
                         className="d-flex form-dropzone-avatar justify-content-center align-items-center h-100 w-100"

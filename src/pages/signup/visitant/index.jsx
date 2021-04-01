@@ -27,8 +27,8 @@ const Singup = () => {
   const user = router.pathname.split("/")[2];
 
   useEffect(() => {
-    methods.register({ name: "avatar" });
-    methods.setValue("avatar", image);
+    methods.register({ name: "photo" });
+    methods.setValue("photo", image);
     return () => {
       URL.revokeObjectURL(image?.preview);
     };
@@ -150,7 +150,7 @@ const Singup = () => {
                     >
                       <input
                         {...getInputProps({ multiple: false })}
-                        name="avatar"
+                        name="photo"
                       />
                       <div
                         className="d-flex form-dropzone-avatar justify-content-center align-items-center h-100 w-100"
