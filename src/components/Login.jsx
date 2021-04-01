@@ -6,7 +6,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import Input from "../components/Form/Input";
 
 import translate from "../assets/scripts/util/translate";
-
 import bgContet from "../assets/images/arte-wave.svg";
 import logo from "../assets/images/handonkey.svg";
 import user from "../assets/images/icons/user.svg";
@@ -17,12 +16,12 @@ const Login = ({ firstStep, kindUser = "" }) => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <div className="login d-flex">
+    <div className="login d-flex ">
       <div
         className="login-bg"
         style={{ backgroundImage: `url(${bgContet})` }}
       ></div>
-      <div className="login-form w-50 h-100 d-flex flex-column align-items-center justify-content-center">
+      <div className="login-form h-100 d-flex flex-column align-items-center justify-content-center">
         <div className="login-form-logo d-flex flex-wrap flex-column align-items-center w-100">
           <Image src={logo} />
           <p>
@@ -39,7 +38,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
               name="username"
               placeholder="Usuário ou email"
               label={<Image className="mb-1" src={user} />}
-              contextClassName="position-relative mt-4 d-flex justify-content-center"
+              contextClassName="position-relative d-flex justify-content-center"
               labelClassName="position-absolute login-form-label"
               className="text-center login-form-input input-username"
             />
@@ -49,7 +48,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
               type="password"
               placeholder="Senha"
               label={<Image className="mb-1" src={password} />}
-              contextClassName="position-relative mt-4 d-flex justify-content-center"
+              contextClassName="position-relative d-flex justify-content-center"
               labelClassName="position-absolute login-form-label"
               className="text-center login-form-input input-password"
             />
@@ -64,7 +63,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
             <Button
               variant="warning"
               onClick={() => firstStep()}
-              className="login-form-button  mt-3 badge badge-pill"
+              className="login-form-button mt-3 badge badge-pill"
             >
               Voltar
             </Button>
