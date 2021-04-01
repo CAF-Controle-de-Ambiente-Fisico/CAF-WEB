@@ -3,7 +3,10 @@
   position: relative;
 
   .login-form {
+    width: 50%;
+
     .input-context {
+      margin-top: 2rem;
       width: 15.5625rem;
       height: 2rem;
       transition: .8s;
@@ -43,5 +46,17 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom left;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .login {
+    .login-form {
+        width: 100%;
+    }
+  
+    .login-bg {
+      display: none;
+    }
   }
 }
