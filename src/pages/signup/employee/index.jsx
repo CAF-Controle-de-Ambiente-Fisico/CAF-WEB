@@ -13,29 +13,13 @@ import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
 
-import { api } from "../../../../service/api";
-
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
 
   const methods = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
-    api
-      .post("v1/employee", data, {
-        headers: {
-          Accept: "*/*",
-          "Access-Control-Request-Headers": "content-type",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setSendEmail(data.email);
-      })
-      .catch((error) => {
-        console.log("deu merda!");
-      });
+    console.log(data);
   };
   const router = useRouter();
 
