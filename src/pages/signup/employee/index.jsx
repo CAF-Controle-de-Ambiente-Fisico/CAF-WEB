@@ -5,13 +5,12 @@ import { useForm, FormProvider } from "react-hook-form";
 import { Button, Form, Image, Alert } from "react-bootstrap";
 import Dropzone from "react-dropzone";
 
-import Input from "../../../components/Form/Input";
-
 import translate from "../../../assets/scripts/util/translate";
-
+import Input from "../../../components/Form/Input";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
+import api from "../../../../service/api"
 
 const Singup = () => {
   const [image, setImage] = useState();
@@ -20,6 +19,11 @@ const Singup = () => {
   const methods = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    api.post('v1/employee', data)
+    .then((res) => {
+      console.log(res.data)
+      setSendEmail(res.data.user.email)
+    })
   };
   const router = useRouter();
 

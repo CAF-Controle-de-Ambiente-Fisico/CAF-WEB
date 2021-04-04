@@ -2,13 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Image, Button, Alert, Form } from "react-bootstrap";
+import { useForm, FormProvider } from "react-hook-form";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
+import Input from "../../../components/Form/Input";
 
 const Confirmation = () => {
+  const methods = useForm();
+
   const MySwal = withReactContent(Swal);
   const router = useRouter();
 
@@ -38,6 +42,7 @@ const Confirmation = () => {
           <Image src={logo} className="content-logo-image w-100" />
         </div>
         <div className="confirmation-content-options w-100 d-flex justify-content-around mt-5 flex-wrap">
+        <FormProvider {...methods}>
           <Form
             onSubmit={methods.handleSubmit(onSubmit)}
             className="w-100 d-flex flex-column align-items-center flex-wrap"
@@ -68,6 +73,7 @@ const Confirmation = () => {
               Confirmar
             </Button>
           </Form>
+        </FormProvider>
         </div>
       </div>
       <div

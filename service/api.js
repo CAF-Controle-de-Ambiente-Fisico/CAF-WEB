@@ -8,9 +8,10 @@ const api = axios.create({
   baseURL: `http://0.0.0.0:3332`,
 });
 
-// api.interceptors.request.use(async (config) => {
-//   config.headers.Accept = "*/*";
-//   return config;
-// });
+api.interceptors.request.use(async (config) => {
+  config.headers.Accept = "*/*";
+  config.headers['Content-Type'] = "application/json";
+  return config;
+});
 
-export { api };
+export default api ;
