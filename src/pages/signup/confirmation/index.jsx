@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { Image, Button, Alert, Form } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
@@ -15,8 +14,10 @@ const Confirmation = () => {
 
   const MySwal = withReactContent(Swal);
   const router = useRouter();
-
+  const { token } = router.query
+  
   const onSubmit = (data) => {
+    console.log(" token", token);
     if (data.password === data.passwordConfirmation) {
       console.log(data);
       MySwal.fire({
@@ -41,37 +42,50 @@ const Confirmation = () => {
         <div className="confirmation-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo-image w-100" />
         </div>
-        <div className="confirmation-content-options w-100 d-flex justify-content-around mt-5 flex-wrap">
+        <div className="confirmation-content-form d-flex justify-content-center mt-5 flex-wrap">
         <FormProvider {...methods}>
           <Form
             onSubmit={methods.handleSubmit(onSubmit)}
-            className="w-100 d-flex flex-column align-items-center flex-wrap"
+            className="container"
           >
-            <Input
-              required
-              name="password"
-              type="password"
-              placeholder="Senha"
-              contextClassName="position-relative mt-4 d-flex justify-content-center"
-              className="signup-form-input input-password"
-            />
+            <div className="row">
+              <div className="offset-2 col-8 d-flex justify-content-around">
+                <Input
+                  required
+                  name="password"
+                  type="password"
+                  placeholder="Senha"
+                  contextClassName="mt-4"
+                  className="confirmation-form-input"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="offset-2 col-8 d-flex justify-content-around">
+                <Input
+                  required
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder="Digite sua senha novamente"
+                  contextClassName="mt-4"
+                  className="confirmation-form-input"
+                />
+              </div>
+            </div>
 
-            <Input
-              required
-              name="passwordConfirmation"
-              type="password"
-              placeholder="Digite sua senha novamente"
-              contextClassName="position-relative mt-4 d-flex justify-content-center"
-              className="signup-form-input input-password"
-            />
+            <div className="row mt-4">
+              <div className="offset-2 col-8 d-flex justify-content-center">
+                <Button
+                  variant="success"
+                  className="p-3 badge badge-pill text-white m-auto"
+                  type="submit"
+                  size="lg"
+                >
+                  Confirmar
+                </Button>
+              </div>
+            </div>
 
-            <Button
-              variant="warning"
-              className="signup-form-button mt-4 badge badge-pill text-white"
-              type="submit"
-            >
-              Confirmar
-            </Button>
           </Form>
         </FormProvider>
         </div>
