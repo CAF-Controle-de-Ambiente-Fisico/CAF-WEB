@@ -1,0 +1,86 @@
+.access {
+  height: 100vh;
+  position: relative;
+
+  .access-content {
+    width: 59%;
+    height: 62vh;
+    background-color: hsla(0,0%,100%, 0.9);
+    z-index: 1;
+    border-radius: 1rem;
+
+    .access-content-logo {
+      height: 30.8%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .content-logo-title {
+      font-size: $font-size-lg;
+      text-align: center;
+    }
+
+    .access-content-options {
+      justify-content: center;
+      align-items: center;
+
+      a {
+        margin: 0 4rem;
+        width: 26.4%;
+        height: 40%;
+        font-size: $font-size-lg;
+
+        .check-icon {
+          width: 2rem;
+          height: 2rem;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .access-bg {
+    height: 70vh;
+    width: 38%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    position: absolute;
+    
+    &.businessman {
+      bottom: 0;
+      left: 0;
+    }
+
+    &.businesswoman {
+      bottom: 0;
+      right: 0;
+      background-position: bottom right;
+    }
+  }
+}
+  
+  @include media-breakpoint-down(md) {
+    .access {  
+      .access-content {
+        width: 90%;
+  
+        .content-logo-title {
+          font-size: $font-size-sm;
+        }
+  
+        .access-content-options {
+          flex-direction: column;
+          justify-content: space-around;
+  
+          button {
+            width: 9.5rem;
+            height: 3.75rem;
+            font-size: $font-size-sm;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
