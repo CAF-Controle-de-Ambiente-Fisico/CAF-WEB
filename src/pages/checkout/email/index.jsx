@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link"
+import { useRouter } from "next/router";
 import { Image, Button, Form } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -6,18 +8,20 @@ import withReactContent from "sweetalert2-react-content";
 
 import user from "../../../assets/images/icons/user.svg";
 import artform from "../../../assets/images/icons/artform.svg"
-import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
+import checkOut from "../../../assets/images/icons/saida-icon-blue.svg";
 import box from "../../../assets/images/icons/artbox.svg"
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
 
 const CheckoutEmail = () => {
   const methods = useForm();
+  const router = useRouter();
 
   const MySwal = withReactContent(Swal);
   
   const onSubmit = (data) => {
     console.log(" data = ", data);
+    router.push("/checkout/access")
   };
 
   return (
@@ -25,7 +29,7 @@ const CheckoutEmail = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkIn} className="content-logo checkin p-3 mr-3" />
+          <Image src={checkOut} className="content-logo p-3 mr-3" />
           <strong className="check-content-title">Saida</strong>
         </div>
         <div className="check-content-form flex-grow-1">
@@ -48,7 +52,7 @@ const CheckoutEmail = () => {
             </div>
 
             <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
+              <div className="offset-2 col-4 d-flex justify-content-around">
                 <Button
                   variant="primary"
                   className="p-3 text-white m-auto"
@@ -57,6 +61,19 @@ const CheckoutEmail = () => {
                 >
                   Confirmar
                 </Button>
+              </div>
+              <div className="col-4 d-flex justify-content-around">
+                <Link href="/access">
+                <a>
+                <Button
+                  variant="secondary"
+                  className="p-3 text-white m-auto"
+                  size="lg"
+                >
+                  Voltar
+                </Button>
+                </a>
+                </Link>
               </div>
             </div>
 
