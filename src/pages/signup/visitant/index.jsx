@@ -64,7 +64,7 @@ const Singup = () => {
         <ReactLoading type="spinningBubbles" color="#1d3557" height={200} width={200} />
       </div>
       :
-      sendEmail && loading ? (
+      sendEmail ? (
         <div className="confirmation d-flex justify-content-center align-items-center bg-info vh-100">
           <div className="confirmation-content d-flex flex-wrap flex-column p-4">
             <div className="confirmation-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center">
