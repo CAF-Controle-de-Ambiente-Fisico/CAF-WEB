@@ -1,10 +1,11 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Image, Button, Form } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import user from "../../../assets/images/icons/user.svg";
+import password from "../../../assets/images/icons/password.svg";
 import artform from "../../../assets/images/icons/artform.svg"
 import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
 import box from "../../../assets/images/icons/artbox.svg"
@@ -13,11 +14,30 @@ import Input from "../../../components/Form/Input";
 
 const CheckinToken = () => {
   const methods = useForm();
+  const router = useRouter();
 
   const MySwal = withReactContent(Swal);
   
   const onSubmit = (data) => {
     console.log(" data = ", data);
+    if (data.token === "123") {
+        console.log(data);
+        MySwal.fire({
+          icon: "success",
+          title: "Parabens!",
+          text: "Entrada realizada com sucesso!",
+        }).then(() => {
+          router.push("/access");
+        });
+      } else {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Código de acesso ou email incorretos!",
+        }).then(() => {
+          router.push("/access");
+        });
+      }
   };
 
   return (
@@ -25,7 +45,7 @@ const CheckinToken = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkIn} className="content-logo checkin p-3 mr-3" />
+          <Image src={checkIn} className="content-logo p-3 mr-3" />
           <strong className="check-content-title">Entrada</strong>
         </div>
         <div className="check-content-form flex-grow-1">
@@ -37,9 +57,9 @@ const CheckinToken = () => {
             <div className="row mt-5">
               <div className="offset-2 col-8 d-flex justify-content-around">
                 <Input
-                  name="username"
-                  placeholder="Usuário ou email"
-                  label={<Image className="mb-1" src={user} />}
+                  name="token"
+                  placeholder="Senha de acesso"
+                  label={<Image className="mb-1" src={password} />}
                   contextClassName="position-relative d-flex justify-content-center"
                   labelClassName="position-absolute check-form-label"
                   className="text-center check-form-input input-username"
