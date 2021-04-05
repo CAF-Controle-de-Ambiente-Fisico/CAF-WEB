@@ -9,8 +9,11 @@
 
 @import './base/global';
 
+@import './atomic/bg';
 @import './components/input';
 @import './pages/confirmation';
+@import './pages/access';
+@import './pages/check';
 @import './pages/home';
 @import './pages/login';
 @import './pages/signup';
