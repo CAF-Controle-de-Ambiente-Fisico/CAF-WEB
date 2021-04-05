@@ -16,14 +16,9 @@
         }
 
         .content-logo {
-
             &.caf {
                 top: 0;
                 left: 0;
-            }
-
-            &.checkin {
-                color: $primary;
             }
         }
       }
@@ -69,7 +64,9 @@
         }
   
         button {
-          font-size: $font-size-lg;
+            max-width: 18.75rem;
+            min-width: 9.75rem;
+            font-size: $font-size-lg;
         }
       }
     }
