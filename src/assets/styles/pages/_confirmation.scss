@@ -2,14 +2,23 @@
   position: relative;
 
   .confirmation-content {
-    width: 59%;
-    height: 62vh;
+    margin: 0px 10px 0px 10px;
+    min-width: 300px;
+    width: 800px;
+    max-width: 800px;
+    height: 450px;
     background-color: hsla(0,0%,100%, 0.9);
     z-index: 1;
     border-radius: 1rem;
 
+    .confirmation-alert {
+      min-width: 320px;
+      width: 500px;
+      max-width: 500px;
+    }
+
     .confirmation-content-logo {
-      height: 30.8%;
+      height: 120px;
       
       .content-logo-image {
         height: 100%;

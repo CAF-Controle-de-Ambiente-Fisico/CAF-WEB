@@ -33,12 +33,12 @@ const Confirmation = () => {
 
   return (
     <div className="confirmation d-flex justify-content-center align-items-center bg-info vh-100">
-      <div className="confirmation-content d-flex flex-wrap flex-column p-4">
+      <div className="confirmation-content d-flex flex-column justify-content-center align-items-center p-4">
         <div className="confirmation-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo-image w-100" />
         </div>
         <div className="confirmation-content-options w-100 d-flex justify-content-around mt-5 flex-wrap">
-          <Alert variant="success" className="w-50 p-4">
+          <Alert variant="success" className="confirmation-alert p-4">
             <Alert.Heading className="text-center">
               Bem vindo <br />{" "}
               <strong className="text-uppercase"> {"fulano de tal"}</strong>.
