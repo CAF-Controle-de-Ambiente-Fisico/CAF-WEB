@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link"
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Image, Button, Form } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
@@ -7,9 +7,9 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import user from "../../../assets/images/icons/user.svg";
-import artform from "../../../assets/images/icons/artform.svg"
+import artform from "../../../assets/images/icons/artform.svg";
 import checkOut from "../../../assets/images/icons/saida-icon-blue.svg";
-import box from "../../../assets/images/icons/artbox.svg"
+import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
 
@@ -18,10 +18,10 @@ const CheckoutEmail = () => {
   const router = useRouter();
 
   const MySwal = withReactContent(Swal);
-  
+
   const onSubmit = (data) => {
     console.log(" data = ", data);
-    router.push("/checkout/access")
+    router.push("/checkout/code");
   };
 
   return (
@@ -33,53 +33,51 @@ const CheckoutEmail = () => {
           <strong className="check-content-title">Saida</strong>
         </div>
         <div className="check-content-form flex-grow-1">
-        <FormProvider {...methods}>
-          <Form
-            onSubmit={methods.handleSubmit(onSubmit)}
-            className="h-100 container"
-          >
-            <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
-                <Input
-                  name="username"
-                  placeholder="Usuário ou email"
-                  label={<Image className="mb-1" src={user} />}
-                  contextClassName="position-relative d-flex justify-content-center"
-                  labelClassName="position-absolute check-form-label"
-                  className="text-center check-form-input input-username"
-                />
+          <FormProvider {...methods}>
+            <Form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="h-100 container"
+            >
+              <div className="row mt-5">
+                <div className="offset-2 col-8 d-flex justify-content-around">
+                  <Input
+                    name="username"
+                    placeholder="Usuário ou email"
+                    label={<Image className="mb-1" src={user} />}
+                    contextClassName="position-relative d-flex justify-content-center"
+                    labelClassName="position-absolute check-form-label"
+                    className="text-center check-form-input input-username"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="row mt-5">
-              <div className="offset-2 col-4 d-flex justify-content-around">
-                <Button
-                  variant="primary"
-                  className="p-3 text-white m-auto"
-                  type="submit"
-                  size="lg"
-                >
-                  Confirmar
-                </Button>
+              <div className="row mt-5">
+                <div className="offset-2 col-4 d-flex justify-content-around">
+                  <Button
+                    variant="primary"
+                    className="p-3 text-white m-auto"
+                    type="submit"
+                    size="lg"
+                  >
+                    Confirmar
+                  </Button>
+                </div>
+                <div className="col-4 d-flex justify-content-around">
+                  <Link href="/access">
+                    <a>
+                      <Button
+                        variant="secondary"
+                        className="p-3 text-white m-auto"
+                        size="lg"
+                      >
+                        Voltar
+                      </Button>
+                    </a>
+                  </Link>
+                </div>
               </div>
-              <div className="col-4 d-flex justify-content-around">
-                <Link href="/access">
-                <a>
-                <Button
-                  variant="secondary"
-                  className="p-3 text-white m-auto"
-                  size="lg"
-                >
-                  Voltar
-                </Button>
-                </a>
-                </Link>
-              </div>
-            </div>
-
-
-          </Form>
-        </FormProvider>
+            </Form>
+          </FormProvider>
         </div>
       </div>
       <div
