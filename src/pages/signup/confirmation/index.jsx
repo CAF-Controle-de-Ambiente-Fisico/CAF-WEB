@@ -20,12 +20,14 @@ const Confirmation = () => {
   const { token } = router.query;
 
   const onSubmit = (data) => {
+    setLoading(true)
     if (data.password === data.confirm_password) {
       data["token"] = token;
       console.log(data);
       api
         .post("v1/confirmation", data)
         .then((res) => {
+          console.log(" confirmation = ",res)
           MySwal.fire({
             icon: "success",
             title: "Parabéns",
@@ -41,7 +43,9 @@ const Confirmation = () => {
             icon: "error",
             title: "Oops...",
             text: "Desculpe, houve um erro no preenchimento dos requisitos",
-          }).then(() => setLoading(false));
+          }).then(() => {
+            setLoading(false)
+          });
         });
     } else {
       MySwal.fire({

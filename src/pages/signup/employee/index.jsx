@@ -20,12 +20,14 @@ const Singup = () => {
   const [sendEmail, setSendEmail] = useState();
   const [loading, setLoading] = useState(false);
   const MySwal = withReactContent(Swal)
-
+  const router = useRouter();
+  
+  const user = router.pathname.split("/")[2];
 
   const methods = useForm();
   const onSubmit = (data) => {
     setLoading(true)
-    api.post('v1/employee', data)
+    api.post(`v1/${user}`, data)
     .then(res => {
       console.log(res.data)
       setSendEmail(res.data.user.email)
@@ -37,12 +39,15 @@ const Singup = () => {
         icon: 'error',
         title: 'Oops...',
         text: 'Desculpe, houve um erro no preenchimento dos requisitos'
-      }).then(() => setLoading(false))
+      }).then(() => {
+        setLoading(false)
+      })
+    })
+    .finally(() => {
+      console.log("finally")
+      router.push(`${user}`)
     })
   };
-  const router = useRouter();
-
-  const user = router.pathname.split("/")[2];
 
   useEffect(() => {
     methods.register({ name: "photo" });
