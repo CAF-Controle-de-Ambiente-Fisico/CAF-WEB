@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Image, Button, Form } from "react-bootstrap";
@@ -12,17 +12,38 @@ import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
 import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
+import api from "../../../../service/api";
 
 const CheckinEmail = () => {
   const methods = useForm();
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   const MySwal = withReactContent(Swal);
 
   const onSubmit = (data) => {
     console.log(" data = ", data);
-    router.push("/checkin/code");
+    api
+      .post("v1/initiatecheckin", data)
+      .then((res) => {
+        console.log(res);
+        router.push("/checkin/code");
+      })
+      .catch((err) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
+        }).then(() => {
+          router.push("/access");
+          setLoading(false);
+        });
+      });
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   return (
     <div className="check d-flex justify-content-center align-items-center vh-100 bg-green">
@@ -41,8 +62,8 @@ const CheckinEmail = () => {
               <div className="row mt-5">
                 <div className="offset-2 col-8 d-flex justify-content-around">
                   <Input
-                    name="username"
-                    placeholder="Usuário ou email"
+                    name="email"
+                    placeholder="Digite seu Email"
                     label={<Image className="mb-1" src={user} />}
                     contextClassName="position-relative d-flex justify-content-center"
                     labelClassName="position-absolute check-form-label"
