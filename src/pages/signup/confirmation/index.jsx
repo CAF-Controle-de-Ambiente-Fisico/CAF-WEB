@@ -20,20 +20,20 @@ const Confirmation = () => {
   const { token } = router.query;
 
   const onSubmit = (data) => {
-    setLoading(true)
+    setLoading(true);
     if (data.password === data.confirm_password) {
       data["token"] = token;
       console.log(data);
       api
         .post("v1/confirmation", data)
         .then((res) => {
-          console.log(" confirmation = ",res)
+          setLoading(false);
+          console.log(" confirmation = ", res);
           MySwal.fire({
             icon: "success",
             title: "Parabéns",
             text: "Sua conta foi cadastrada com sucesso!",
           }).then(() => {
-            setLoading(false);
             router.push("/");
           });
         })
@@ -44,7 +44,8 @@ const Confirmation = () => {
             title: "Oops...",
             text: "Desculpe, houve um erro no preenchimento dos requisitos",
           }).then(() => {
-            setLoading(false)
+            setLoading(false);
+            router.reload();
           });
         });
     } else {
@@ -52,7 +53,8 @@ const Confirmation = () => {
         icon: "warning",
         title: "Oops...",
         text: "Senhas não são iguais",
-      });
+      }).then(() => router.reload());
+      setLoading(false);
     }
   };
 

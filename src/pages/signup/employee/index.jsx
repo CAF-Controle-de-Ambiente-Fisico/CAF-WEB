@@ -40,10 +40,8 @@ const Singup = () => {
           icon: "error",
           title: "Oops...",
           text: "Desculpe, houve um erro no preenchimento dos requisitos",
-          willClose: () => {
-            router.reload();
-          },
         }).then(() => {
+          router.reload();
           setLoading(false);
         });
       });
