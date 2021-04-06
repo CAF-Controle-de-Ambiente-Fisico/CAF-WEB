@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Image, Button, Alert, Form } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
@@ -8,25 +8,34 @@ import withReactContent from "sweetalert2-react-content";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
+import api from "../../../../service/api";
 
 const Confirmation = () => {
   const methods = useForm();
+  const [loading, setLoading] = useState(false);
 
   const MySwal = withReactContent(Swal);
   const router = useRouter();
-  const { token } = router.query
-  
+  const { token } = router.query;
+
   const onSubmit = (data) => {
-    console.log(" token", token);
     if (data.password === data.passwordConfirmation) {
-      console.log(data);
-      MySwal.fire({
-        icon: "success",
-        title: "Parabens!",
-        text: "Você foi cadastrado com Sucesso!",
-      }).then(() => {
-        router.push("/");
-      });
+      data["token"] = token;
+      api
+        .post("v1/employee/confirmation", data)
+        .then((res) => {
+          console.log(res.data);
+          setSendEmail(res.data.user.email);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("error:", error);
+          MySwal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Desculpe, houve um erro no preenchimento dos requisitos",
+          }).then(() => setLoading(false));
+        });
     } else {
       MySwal.fire({
         icon: "warning",
@@ -43,51 +52,50 @@ const Confirmation = () => {
           <Image src={logo} className="content-logo-image w-100" />
         </div>
         <div className="confirmation-content-form d-flex justify-content-center mt-5 flex-wrap">
-        <FormProvider {...methods}>
-          <Form
-            onSubmit={methods.handleSubmit(onSubmit)}
-            className="container"
-          >
-            <div className="row">
-              <div className="offset-2 col-8 d-flex justify-content-around">
-                <Input
-                  required
-                  name="password"
-                  type="password"
-                  placeholder="Senha"
-                  contextClassName="mt-4"
-                  className="confirmation-form-input"
-                />
+          <FormProvider {...methods}>
+            <Form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="container"
+            >
+              <div className="row">
+                <div className="offset-2 col-8 d-flex justify-content-around">
+                  <Input
+                    required
+                    name="password"
+                    type="password"
+                    placeholder="Senha"
+                    contextClassName="mt-4"
+                    className="confirmation-form-input"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="offset-2 col-8 d-flex justify-content-around">
-                <Input
-                  required
-                  name="passwordConfirmation"
-                  type="password"
-                  placeholder="Digite sua senha novamente"
-                  contextClassName="mt-4"
-                  className="confirmation-form-input"
-                />
+              <div className="row">
+                <div className="offset-2 col-8 d-flex justify-content-around">
+                  <Input
+                    required
+                    name="passwordConfirmation"
+                    type="password"
+                    placeholder="Digite sua senha novamente"
+                    contextClassName="mt-4"
+                    className="confirmation-form-input"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="row mt-4">
-              <div className="offset-2 col-8 d-flex justify-content-center">
-                <Button
-                  variant="success"
-                  className="p-3 badge badge-pill text-white m-auto"
-                  type="submit"
-                  size="lg"
-                >
-                  Confirmar
-                </Button>
+              <div className="row mt-4">
+                <div className="offset-2 col-8 d-flex justify-content-center">
+                  <Button
+                    variant="success"
+                    className="p-3 badge badge-pill text-white m-auto"
+                    type="submit"
+                    size="lg"
+                  >
+                    Confirmar
+                  </Button>
+                </div>
               </div>
-            </div>
-
-          </Form>
-        </FormProvider>
+            </Form>
+          </FormProvider>
         </div>
       </div>
       <div

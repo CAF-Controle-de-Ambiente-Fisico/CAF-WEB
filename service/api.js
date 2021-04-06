@@ -5,13 +5,13 @@ axios.defaults.paramsSerializer = (params) =>
   qs.stringify(params, { arrayFormat: "brackets" });
 
 const api = axios.create({
-  baseURL: `http://0.0.0.0:3332`,
+  baseURL: `http://localhost:3332`,
 });
 
 api.interceptors.request.use(async (config) => {
   config.headers.Accept = "*/*";
-  config.headers['Content-Type'] = "application/json";
+  config.headers["Content-Type"] = "application/json";
   return config;
 });
 
-export default api ;
+export default api;
