@@ -18,7 +18,7 @@ import api from "../../../../service/api";
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const MySwal = withReactContent(Swal);
   const router = useRouter();
 
