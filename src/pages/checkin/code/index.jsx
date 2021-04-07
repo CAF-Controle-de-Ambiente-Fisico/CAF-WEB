@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import password from "../../../assets/images/icons/password.svg";
-import artform from "../../../assets/images/icons/artform.svg"
+import artform from "../../../assets/images/icons/artform.svg";
 import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
-import box from "../../../assets/images/icons/artbox.svg"
+import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
 
@@ -17,27 +17,27 @@ const CheckinToken = () => {
   const router = useRouter();
 
   const MySwal = withReactContent(Swal);
-  
+
   const onSubmit = (data) => {
     console.log(" data = ", data);
     if (data.token === "123") {
-        console.log(data);
-        MySwal.fire({
-          icon: "success",
-          title: "Parabens!",
-          text: "Entrada realizada com sucesso!",
-        }).then(() => {
-          router.push("/access");
-        });
-      } else {
-        MySwal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Código de acesso ou email incorretos!",
-        }).then(() => {
-          router.push("/access");
-        });
-      }
+      console.log(data);
+      MySwal.fire({
+        icon: "success",
+        title: "Parabens!",
+        text: "Entrada realizada com sucesso!",
+      }).then(() => {
+        router.push("/access");
+      });
+    } else {
+      MySwal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Código de acesso ou email incorretos!",
+      }).then(() => {
+        router.push("/access");
+      });
+    }
   };
 
   return (
@@ -49,13 +49,12 @@ const CheckinToken = () => {
           <strong className="check-content-title">Entrada</strong>
         </div>
         <div className="check-content-form flex-grow-1">
-        <FormProvider {...methods}>
-          <Form
-            onSubmit={methods.handleSubmit(onSubmit)}
-            className="h-100 container"
-          >
-            <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
+          <FormProvider {...methods}>
+            <Form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="w-100 h-100 container"
+            >
+              <div className="row w-100 mt-5 justify-content-center">
                 <Input
                   name="token"
                   placeholder="Senha de acesso"
@@ -65,24 +64,21 @@ const CheckinToken = () => {
                   className="text-center check-form-input input-username"
                 />
               </div>
-            </div>
 
-            <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
-                <Button
-                  variant="primary"
-                  className="p-3 text-white m-auto"
-                  type="submit"
-                  size="lg"
-                >
-                  Confirmar
-                </Button>
+              <div className="row mt-5">
+                <div className="offset-2 col-8 d-flex justify-content-around">
+                  <Button
+                    variant="primary"
+                    className="p-3 text-white m-auto"
+                    type="submit"
+                    size="lg"
+                  >
+                    Confirmar
+                  </Button>
+                </div>
               </div>
-            </div>
-
-
-          </Form>
-        </FormProvider>
+            </Form>
+          </FormProvider>
         </div>
       </div>
       <div
