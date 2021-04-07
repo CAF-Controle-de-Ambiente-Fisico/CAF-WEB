@@ -20,29 +20,32 @@ const Singup = () => {
   const [sendEmail, setSendEmail] = useState();
   const [loading, setLoading] = useState(false);
   const MySwal = withReactContent(Swal)
-
-
-  const methods = useForm();
-  const onSubmit = (data) => {
-    setLoading(true)
-    api.post('v1/visitant', data)
-    .then(res => {
-      console.log(res.data)
-      setSendEmail(res.data.user.email)
-      setLoading(false)
-    })
-    .catch(error => {
-      console.log('error:', error)
-      MySwal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Desculpe, houve um erro no preenchimento dos requisitos'
-      }).then(() => setLoading(false))
-    })
-  };
   const router = useRouter();
 
   const user = router.pathname.split("/")[2];
+
+  const methods = useForm();
+  const onSubmit = (data) => {
+    setLoading(true);
+    api
+      .post(`v1/${user}`, data)
+      .then((res) => {
+        console.log(res.data);
+        setSendEmail(res.data.user.email);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error:", error);
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
+        }).then(() => {
+          router.reload();
+          setLoading(false);
+        });
+      });
+  };
 
   useEffect(() => {
     methods.register({ name: "photo" });

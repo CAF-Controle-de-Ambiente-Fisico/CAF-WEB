@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { Button, Form, Image } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
@@ -10,10 +11,29 @@ import bgContet from "../assets/images/arte-wave.svg";
 import logo from "../assets/images/handonkey.svg";
 import user from "../assets/images/icons/user.svg";
 import password from "../assets/images/icons/password.svg";
+import api from "../../service/api";
 
 const Login = ({ firstStep, kindUser = "" }) => {
   const methods = useForm();
-  const onSubmit = (data) => console.log(data);
+  const router = useRouter();
+
+  const onSubmit = (data) => {
+    api
+      .post("v1/auth", data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log("error:", error);
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
+        }).then(() => {
+          router.reload();
+        });
+      });
+  }
 
   return (
     <div className="login d-flex ">
@@ -35,7 +55,8 @@ const Login = ({ firstStep, kindUser = "" }) => {
             className="w-100 d-flex flex-column align-items-center flex-wrap"
           >
             <Input
-              name="username"
+              name="email"
+              type="email"
               placeholder="Usuário ou email"
               label={<Image className="mb-1" src={user} />}
               contextClassName="position-relative d-flex justify-content-center"

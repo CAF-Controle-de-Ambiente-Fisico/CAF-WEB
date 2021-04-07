@@ -12,6 +12,7 @@ import checkOut from "../../../assets/images/icons/saida-icon-blue.svg";
 import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
+import api from "../../../../service/api"
 
 const CheckoutEmail = () => {
   const methods = useForm();
@@ -21,7 +22,22 @@ const CheckoutEmail = () => {
 
   const onSubmit = (data) => {
     console.log(" data = ", data);
-    router.push("/checkout/code");
+    api
+      .post("v1/initiatecheckout", data)
+      .then((res) => {
+        console.log(res);
+        router.push("/checkout/code");
+      })
+      .catch((err) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
+        }).then(() => {
+          router.push("/access");
+          setLoading(false);
+        });
+      });
   };
 
   return (

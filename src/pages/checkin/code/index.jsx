@@ -11,6 +11,7 @@ import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
 import box from "../../../assets/images/icons/artbox.svg"
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
+import api from "../../../../service/api"
 
 const CheckinToken = () => {
   const methods = useForm();
@@ -20,24 +21,28 @@ const CheckinToken = () => {
   
   const onSubmit = (data) => {
     console.log(" data = ", data);
-    if (data.token === "123") {
-        console.log(data);
+    api
+      .post("v1/checkin", data)
+      .then((res) => {
+        console.log(res);
         MySwal.fire({
           icon: "success",
-          title: "Parabens!",
-          text: "Entrada realizada com sucesso!",
+          title: "Bem vindo ao TRTRN-21",
+          text: "Entrada registrada com Sucesso!",
         }).then(() => {
           router.push("/access");
         });
-      } else {
+      })
+      .catch((err) => {
         MySwal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Código de acesso ou email incorretos!",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
         }).then(() => {
           router.push("/access");
+          setLoading(false);
         });
-      }
+      });
   };
 
   return (
@@ -57,7 +62,7 @@ const CheckinToken = () => {
             <div className="row mt-5">
               <div className="offset-2 col-8 d-flex justify-content-around">
                 <Input
-                  name="token"
+                  name="code"
                   placeholder="Senha de acesso"
                   label={<Image className="mb-1" src={password} />}
                   contextClassName="position-relative d-flex justify-content-center"

@@ -11,33 +11,38 @@ import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
 import checkOut from "../../../assets/images/icons/saida-icon-blue.svg";
+import api from "../../../../service/api"
 
 const CheckinToken = () => {
   const methods = useForm();
   const router = useRouter();
 
   const MySwal = withReactContent(Swal);
-
+  
   const onSubmit = (data) => {
     console.log(" data = ", data);
-    if (data.token === "123") {
-      console.log(data);
-      MySwal.fire({
-        icon: "success",
-        title: "Parabens!",
-        text: "Saida realizada com sucesso!",
-      }).then(() => {
-        router.push("/access");
+    api
+      .post("v1/checkout", data)
+      .then((res) => {
+        console.log(res);
+        MySwal.fire({
+          icon: "success",
+          title: "Volte sempre!",
+          text: "Saida registrada com Sucesso!",
+        }).then(() => {
+          router.push("/access");
+        });
+      })
+      .catch((err) => {
+        MySwal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Desculpe, houve um erro no preenchimento dos requisitos",
+        }).then(() => {
+          router.push("/access");
+          setLoading(false);
+        });
       });
-    } else {
-      MySwal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Código de acesso ou email incorretos!",
-      }).then(() => {
-        router.push("/access");
-      });
-    }
   };
 
   return (
