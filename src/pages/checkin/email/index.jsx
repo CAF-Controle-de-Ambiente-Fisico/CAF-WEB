@@ -50,7 +50,7 @@ const CheckinEmail = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkIn} className="content-logo p-3 mr-3" />
+          <Image src={checkIn} className="mr-1" />
           <strong className="check-content-title">Entrada</strong>
         </div>
         <div className="check-content-form flex-grow-1">
@@ -72,25 +72,20 @@ const CheckinEmail = () => {
                 </div>
               </div>
 
-              <div className="row mt-5">
-                <div className="offset-2 col-4 d-flex justify-content-around">
+              <div className="row mt-5 d-flex row-buttons justify-content-center align-items-center">
+                <div className="d-flex justify-content-around confirm-div">
                   <Button
                     variant="primary"
-                    className="p-3 text-white m-auto"
+                    className="text-white"
                     type="submit"
-                    size="lg"
                   >
                     Confirmar
                   </Button>
                 </div>
-                <div className="col-4 d-flex justify-content-around">
+                <div className="d-flex justify-content-around">
                   <Link href="/access">
                     <a>
-                      <Button
-                        variant="secondary"
-                        className="p-3 text-white m-auto"
-                        size="lg"
-                      >
+                      <Button variant="secondary" className="text-white">
                         Voltar
                       </Button>
                     </a>

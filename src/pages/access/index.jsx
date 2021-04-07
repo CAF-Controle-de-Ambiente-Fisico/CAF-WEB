@@ -10,7 +10,7 @@ import checkOut from "../../assets/images/icons/out.svg";
 const Access = (props) => {
   return (
     <div className="access d-flex justify-content-center align-items-center bg-info">
-      <div className="access-content d-flex flex-wrap flex-column p-4">
+      <div className="access-content d-flex flex-column justify-content-center align-items-center p-4">
         <div
           className="access-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center"
           style={{ backgroundImage: `url(${logo})` }}
@@ -18,17 +18,17 @@ const Access = (props) => {
         <h1 className="content-logo-title text-primary">
           Controle de Ambientes Fisicos
         </h1>
-        <div className="access-content-options w-100 d-flex flex-grow-1 flex-wrap">
+        <div className="access-content-options d-flex">
           <Link href="/checkin/email">
-            <a className="btn btn-primary d-flex justify-content-center align-items-center">
+            <a className="btn btn-primary d-flex justify-content-center align-items-center margin-bottom-responsive">
               <img src={checkIn} alt="checkin icon" className="check-icon"/>
-              Entrada
+              <div className="font-acess-button">Entrada</div>
             </a>
           </Link>
           <Link href="/checkout/email">
             <a className="btn btn-primary d-flex justify-content-center align-items-center">
               <img src={checkOut} alt="checkin icon" className="check-icon"/>
-              Saida
+              <div className="font-acess-button">Saida</div>
             </a>
           </Link>
         </div>

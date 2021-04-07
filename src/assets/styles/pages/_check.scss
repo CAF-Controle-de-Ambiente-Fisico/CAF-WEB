@@ -1,92 +1,109 @@
+.row-buttons {
+  @media screen and (max-width: 680px) {
+    flex-direction: column;
+    .confirm-div {
+      margin-bottom: 12px;
+    }
+  }
+}
+
 .check {
-    position: relative;
-  
-    .check-content {
-      width: 59%;
-      height: 62vh;
-      background-color: hsla(0,0%,100%, 0.9);
-      z-index: 1;
-      border-radius: 1rem;
-  
-      .check-content-logo {
-        height: 30.8%;
+  .check-content {
+    width: 700px;
+    min-width: 300px;
+    height: auto;
+    background-color: hsla(0, 0%, 100%, 0.9);
+    z-index: 1;
+    border-radius: 1rem;
+    margin: 0px 10px;
 
-        .check-content-title {
-            font-size: 1.875rem;
-        }
+    .check-content-logo {
+      height: 30.8%;
 
-        .content-logo {
-            &.caf {
-                top: 0;
-                left: 0;
-            }
-        }
+      .check-content-title {
+        font-size: 1.875rem;
       }
-  
-      .check-content-form {
-        .input-context {
-          width: 15.5625rem;
-          height: 2rem;
-          transition: .8s;
-          border-bottom: 1px solid $shadow;
 
-          .check-form-input {
-            width: 100%;
-            font-size: .8125rem;
-          }
-          
-          .check-form-label {
-            bottom: 0;
-            left: 0;
-            margin: 0;
-            color: $primary;
-          }
-    
-          &:hover {
-            width: 20.750rem;
-          }
-    
-          .check-form-input {
-            width: 100%;
-            font-size: .8125rem;
-          }
-          
-          .check-form-label {
-            bottom: 0;
-            left: 0;
-            margin: 0;
-            color: $primary;
-          }
-  
-          &:hover {
-            width: 20.750rem;
-          }
+      .content-logo {
+        @media screen and (max-width: 510px) {
+          height: 50px;
         }
-  
-        button {
-            max-width: 18.75rem;
-            min-width: 9.75rem;
-            font-size: $font-size-lg;
+
+        &.caf {
+          top: 0;
+          left: 0;
         }
       }
     }
-  
-    .check-bg {
-      height: 70vh;
-      width: 38%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: bottom left;
-      position: absolute;
-      bottom: 0;
-      left: 0;
 
-      &.box {
-        height: 30vh;
-        width: 38%;
-        top: 0;
-        right: 0;
-        background-position: bottom right;
+    .check-content-form {
+      .input-context {
+        width: 15.5625rem;
+        height: 2rem;
+        transition: 0.8s;
+        border-bottom: 1px solid $shadow;
+
+        .check-form-input {
+          width: 100%;
+          font-size: 0.8125rem;
+        }
+
+        .check-form-label {
+          bottom: 0;
+          left: 0;
+          margin: 0;
+          color: $primary;
+        }
+
+        &:hover {
+          width: 20.75rem;
+        }
+
+        .check-form-input {
+          width: 100%;
+          font-size: 0.8125rem;
+        }
+
+        .check-form-label {
+          bottom: 0;
+          left: 0;
+          margin: 0;
+          color: $primary;
+        }
+
+        &:hover {
+          width: 20.75rem;
+        }
+      }
+
+      button {
+        border-radius: 10px;
+        margin: 0 2rem;
+        width: 140px;
+        height: 80px;
+        font-size: $font-size-lg;
+        box-shadow: 0px 5px 15px #c0d4f1;
+        font-weight: bold;
       }
     }
   }
+
+  .check-bg {
+    height: 70vh;
+    width: 38%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    &.box {
+      height: 30vh;
+      width: 38%;
+      top: 0;
+      right: 0;
+      background-position: bottom right;
+    }
+  }
+}

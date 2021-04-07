@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import password from "../../../assets/images/icons/password.svg";
-import artform from "../../../assets/images/icons/artform.svg"
+import artform from "../../../assets/images/icons/artform.svg";
 import checkIn from "../../../assets/images/icons/Entrada-azul.svg";
-import box from "../../../assets/images/icons/artbox.svg"
+import box from "../../../assets/images/icons/artbox.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
 import api from "../../../../service/api"
@@ -18,7 +18,7 @@ const CheckinToken = () => {
   const router = useRouter();
 
   const MySwal = withReactContent(Swal);
-  
+
   const onSubmit = (data) => {
     console.log(" data = ", data);
     api
@@ -50,17 +50,16 @@ const CheckinToken = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkIn} className="content-logo p-3 mr-3" />
+          <Image src={checkIn} className="mr-1" />
           <strong className="check-content-title">Entrada</strong>
         </div>
         <div className="check-content-form flex-grow-1">
-        <FormProvider {...methods}>
-          <Form
-            onSubmit={methods.handleSubmit(onSubmit)}
-            className="h-100 container"
-          >
-            <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
+          <FormProvider {...methods}>
+            <Form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="w-100 h-100 container"
+            >
+              <div className="row w-100 mt-5 justify-content-center">
                 <Input
                   name="code"
                   placeholder="Senha de acesso"
@@ -70,24 +69,21 @@ const CheckinToken = () => {
                   className="text-center check-form-input input-username"
                 />
               </div>
-            </div>
 
-            <div className="row mt-5">
-              <div className="offset-2 col-8 d-flex justify-content-around">
-                <Button
-                  variant="primary"
-                  className="p-3 text-white m-auto"
-                  type="submit"
-                  size="lg"
-                >
-                  Confirmar
-                </Button>
+              <div className="row mt-5">
+                <div className="offset-2 col-8 d-flex justify-content-around">
+                  <Button
+                    variant="primary"
+                    className="p-3 text-white m-auto"
+                    type="submit"
+                    size="lg"
+                  >
+                    Confirmar
+                  </Button>
+                </div>
               </div>
-            </div>
-
-
-          </Form>
-        </FormProvider>
+            </Form>
+          </FormProvider>
         </div>
       </div>
       <div

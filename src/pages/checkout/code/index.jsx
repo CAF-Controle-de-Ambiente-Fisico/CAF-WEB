@@ -50,26 +50,24 @@ const CheckinToken = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkOut} className="content-logo p-3 mr-3" />
+          <Image src={checkOut} className="mr-1" />
           <strong className="check-content-title">Saida</strong>
         </div>
         <div className="check-content-form flex-grow-1">
           <FormProvider {...methods}>
             <Form
               onSubmit={methods.handleSubmit(onSubmit)}
-              className="h-100 container"
+              className="w-100 h-100 container"
             >
-              <div className="row mt-5">
-                <div className="offset-2 col-8 d-flex justify-content-around">
-                  <Input
-                    name="token"
-                    placeholder="Senha de acesso"
-                    label={<Image className="mb-1" src={password} />}
-                    contextClassName="position-relative d-flex justify-content-center"
-                    labelClassName="position-absolute check-form-label"
-                    className="text-center check-form-input input-username"
-                  />
-                </div>
+              <div className="row w-100 mt-5 justify-content-center">
+                <Input
+                  name="token"
+                  placeholder="Senha de acesso"
+                  label={<Image className="mb-1" src={password} />}
+                  contextClassName="position-relative d-flex justify-content-center"
+                  labelClassName="position-absolute check-form-label"
+                  className="text-center check-form-input input-username"
+                />
               </div>
 
               <div className="row mt-5">
