@@ -29,7 +29,7 @@ const CheckoutEmail = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkOut} className="content-logo p-3 mr-3" />
+          <Image src={checkOut} className="mr-1" />
           <strong className="check-content-title">Saida</strong>
         </div>
         <div className="check-content-form flex-grow-1">
@@ -38,37 +38,33 @@ const CheckoutEmail = () => {
               onSubmit={methods.handleSubmit(onSubmit)}
               className="h-100 container"
             >
-              <div className="row mt-5">
-                <div className="offset-2 col-8 d-flex justify-content-around">
-                  <Input
-                    name="username"
-                    placeholder="Usuário ou email"
-                    label={<Image className="mb-1" src={user} />}
-                    contextClassName="position-relative d-flex justify-content-center"
-                    labelClassName="position-absolute check-form-label"
-                    className="text-center check-form-input input-username"
-                  />
-                </div>
+              <div className="row mt-5 w-100 justify-content-center">
+                <Input
+                  name="username"
+                  placeholder="Usuário ou email"
+                  label={<Image className="mb-1" src={user} />}
+                  contextClassName="position-relative d-flex justify-content-center"
+                  labelClassName="position-absolute check-form-label"
+                  className="text-center check-form-input input-username"
+                />
               </div>
 
-              <div className="row mt-5">
-                <div className="offset-2 col-4 d-flex justify-content-around">
+              <div className="row mt-5 d-flex row-buttons justify-content-center align-items-center">
+                <div className="d-flex justify-content-around confirm-div">
                   <Button
                     variant="primary"
-                    className="p-3 text-white m-auto"
+                    className="text-white"
                     type="submit"
-                    size="lg"
                   >
                     Confirmar
                   </Button>
                 </div>
-                <div className="col-4 d-flex justify-content-around">
+                <div className="d-flex justify-content-around">
                   <Link href="/access">
                     <a>
                       <Button
                         variant="secondary"
-                        className="p-3 text-white m-auto"
-                        size="lg"
+                        className="text-white"
                       >
                         Voltar
                       </Button>
