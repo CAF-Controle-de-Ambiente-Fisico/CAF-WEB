@@ -17,7 +17,7 @@ const Confirmation = () => {
 
   const MySwal = withReactContent(Swal);
   const router = useRouter();
-  const { token } = router.query;
+  const { token, role } = router.query;
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -25,7 +25,7 @@ const Confirmation = () => {
       data["token"] = token;
       console.log(data);
       api
-        .post("v1/confirmation", data)
+        .post(`v1/${role}/confirmation`, data)
         .then((res) => {
           setLoading(false);
           console.log(" confirmation = ", res);

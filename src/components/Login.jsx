@@ -22,6 +22,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
       .post("v1/auth", data)
       .then((res) => {
         console.log(res.data);
+        router.push('/dashboard')
       })
       .catch((error) => {
         console.log("error:", error);
