@@ -4,39 +4,67 @@ import { useRouter } from "next/router";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button, Form, Image, Alert } from "react-bootstrap";
 import Dropzone from "react-dropzone";
-
-import Input from "../../../components/Form/Input";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import ReactLoading from 'react-loading';
 
 import translate from "../../../assets/scripts/util/translate";
-
+import Input from "../../../components/Form/Input";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
+import api from "../../../../service/api"
 
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
+  const [loading, setLoading] = useState(false);
+  const MySwal = withReactContent(Swal)
+
 
   const methods = useForm();
   const onSubmit = (data) => {
-    setSendEmail(data.email);
-    console.log(data);
+    setLoading(true)
+    api.post('v1/visitant', data)
+    .then(res => {
+      console.log(res.data)
+      setSendEmail(res.data.user.email)
+      setLoading(false)
+    })
+    .catch(error => {
+      console.log('error:', error)
+      MySwal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Desculpe, houve um erro no preenchimento dos requisitos'
+      }).then(() => setLoading(false))
+    })
   };
   const router = useRouter();
 
   const user = router.pathname.split("/")[2];
 
   useEffect(() => {
-    methods.register({ name: "avatar" });
-    methods.setValue("avatar", image);
+    methods.register({ name: "photo" });
+    methods.setValue("photo", image);
     return () => {
       URL.revokeObjectURL(image?.preview);
     };
   }, [image]);
 
+  useEffect(() => {
+    setLoading(false)
+  },[])
+
   return (
     <>
-      {sendEmail ? (
+    {
+      loading ?
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <ReactLoading type="spinningBubbles" color="#1d3557" height={200} width={200} />
+      </div>
+      :
+      sendEmail ? (
         <div className="confirmation d-flex justify-content-center align-items-center bg-info vh-100">
           <div className="confirmation-content d-flex flex-wrap flex-column p-4">
             <div className="confirmation-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center">
@@ -82,106 +110,90 @@ const Singup = () => {
               <span className="text-primary text-capitalize">
                 Cadastro de {translate(user)}
               </span>
-            </div>
-            <FormProvider {...methods}>
-              <Form
-                onSubmit={methods.handleSubmit(onSubmit)}
-                className="w-100 d-flex flex-column align-items-center flex-wrap"
-              >
-                <Input
-                  required
-                  name="username"
-                  placeholder="Nome de usuário"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-username"
-                />
-
-                <Input
-                  required
-                  name="cpf"
-                  type="text"
-                  placeholder="CPF"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-password"
-                />
-
-                <Input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Digite seu melhor email"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-username"
-                />
-
-                <Input
-                  required
-                  name="password"
-                  type="password"
-                  placeholder="Senha"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-password"
-                />
-
-                <Input
-                  required
-                  name="passwordConfirmation"
-                  type="password"
-                  placeholder="Digite sua senha novamente"
-                  contextClassName="position-relative mt-4 d-flex justify-content-center"
-                  className="signup-form-input input-password"
-                />
-
-                <Dropzone
-                  onDrop={(acceptedFiles) =>
-                    setImage(
-                      Object.assign(acceptedFiles[0], {
-                        preview: URL.createObjectURL(acceptedFiles[0]),
-                      })
-                    )
-                  }
+              <FormProvider {...methods}>
+                <Form
+                  onSubmit={methods.handleSubmit(onSubmit)}
+                  className="w-100 d-flex flex-column align-items-center flex-wrap"
                 >
-                  {({ getRootProps, getInputProps }) => (
-                    <div
-                      {...getRootProps()}
-                      className={`mt-4 signup-form-dropzone ${
-                        image && "rounded-circle border-0"
-                      }`}
-                    >
-                      <input
-                        {...getInputProps({ multiple: false })}
-                        name="avatar"
-                      />
+                  <Input
+                    required
+                    name="username"
+                    placeholder="Nome de usuário"
+                    contextClassName="position-relative mt-4 d-flex justify-content-center"
+                    className="signup-form-input input-username"
+                  />
+
+                  <Input
+                    required
+                    name="cpf"
+                    type="text"
+                    placeholder="cpf"
+                    contextClassName="position-relative mt-4 d-flex justify-content-center"
+                    className="signup-form-input input-password"
+                  />
+
+                  <Input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Digite seu melhor email"
+                    contextClassName="position-relative mt-4 d-flex justify-content-center"
+                    className="signup-form-input input-username"
+                  />
+
+                  <Dropzone
+                    onDrop={(acceptedFiles) =>
+                      setImage(
+                        Object.assign(acceptedFiles[0], {
+                          preview: URL.createObjectURL(acceptedFiles[0]),
+                        })
+                      )
+                    }
+                  >
+                    {({ getRootProps, getInputProps }) => (
                       <div
-                        className="d-flex form-dropzone-avatar justify-content-center align-items-center h-100 w-100"
-                        style={{
-                          backgroundImage: `url(${
-                            image ? image.preview : avatar
-                          })`,
-                        }}
-                      ></div>
-                    </div>
-                  )}
-                </Dropzone>
+                        {...getRootProps()}
+                        className={`mt-4 signup-form-dropzone ${
+                          image && "rounded-circle border-0"
+                        }`}
+                      >
+                        <input
+                          {...getInputProps({ multiple: false })}
+                          name="photo"
+                        />
+                        <div
+                          className="d-flex form-dropzone-avatar justify-content-center align-items-center h-100 w-100"
+                          style={{
+                            backgroundImage: `url(${
+                              image ? image.preview : avatar
+                            })`,
+                          }}
+                        ></div>
+                      </div>
+                    )}
+                  </Dropzone>
 
-                <Button
-                  variant="warning"
-                  className="signup-form-button mt-4 badge badge-pill text-white"
-                  type="submit"
-                >
-                  Inscrever-se
-                </Button>
+                  <Button
+                    variant="warning"
+                    className="signup-form-button mt-4 badge badge-pill text-white"
+                    type="submit"
+                  >
+                    Inscrever-se
+                  </Button>
 
-                <Link href="/">
-                  <a className="mt-4 text-center text-primary signup-form-link">
-                    Voltar
-                  </a>
-                </Link>
-              </Form>
-            </FormProvider>
+                  <Link href="/">
+                    <a className="mt-4 text-center text-primary signup-form-link">
+                      Voltar
+                    </a>
+                  </Link>
+                </Form>
+              </FormProvider>
+            </div>
+
           </div>
         </div>
-      )}
+      )
+    }
     </>
   );
 };

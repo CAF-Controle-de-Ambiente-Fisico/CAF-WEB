@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import bgContet from "../assets/images/arte-wave.svg";
 import logo from "../assets/images/handonkey.svg";
