@@ -45,7 +45,7 @@ const CheckinToken = () => {
       <div className="check-content d-flex flex-wrap flex-column p-4">
         <div className="check-content-logo w-100 position-relative d-flex justify-content-center flex-wrap align-items-center">
           <Image src={logo} className="content-logo position-absolute caf" />
-          <Image src={checkIn} className="content-logo p-3 mr-3" />
+          <Image src={checkIn} className="mr-1" />
           <strong className="check-content-title">Entrada</strong>
         </div>
         <div className="check-content-form flex-grow-1">
