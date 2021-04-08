@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Image, Button, Form } from "react-bootstrap";
-import { useForm, FormProvider } from "react-hook-form";
+import StepWizard from "react-step-wizard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useForm, FormProvider } from "react-hook-form";
+import { Image, Form } from "react-bootstrap";
 
-import password from "../../../assets/images/icons/password.svg";
-import artform from "../../../assets/images/icons/artform.svg";
-import box from "../../../assets/images/icons/artbox.svg";
-import logo from "../../../assets/images/handonkey.svg";
-import Input from "../../../components/Form/Input";
-import checkOut from "../../../assets/images/icons/saida-icon-blue.svg";
-import api from "../../../../service/api"
+import Email from "../../components/Steps/Email";
+import AccessCode from "../../components/Steps/AccessCode";
 
-const CheckinToken = () => {
-  const methods = useForm();
+import artform from "../../assets/images/icons/artform.svg";
+import checkOut from "../../assets/images/icons/saida-icon-blue.svg";
+import box from "../../assets/images/icons/artbox.svg";
+import logo from "../../assets/images/handonkey.svg";
+
+import api from "../../../service/api";
+
+const Checkout = () => {
+  const stepWizard = useRef();
   const router = useRouter();
-
   const MySwal = withReactContent(Swal);
-  
+  const [checkout, setCheckout] = useState({ email: "", code: "" });
+  const methods = useForm();
+  const email = methods.watch("email");
+
   const onSubmit = (data) => {
     console.log(" data = ", data);
     api
@@ -27,8 +32,8 @@ const CheckinToken = () => {
         console.log(res);
         MySwal.fire({
           icon: "success",
-          title: "Volte sempre!",
-          text: "Saida registrada com Sucesso!",
+          title: "Bem vindo ao TRTRN-21",
+          text: "Entrada registrada com Sucesso!",
         }).then(() => {
           router.push("/access");
         });
@@ -40,10 +45,16 @@ const CheckinToken = () => {
           text: "Desculpe, houve um erro no preenchimento dos requisitos",
         }).then(() => {
           router.push("/access");
-          setLoading(false);
         });
       });
   };
+
+  useEffect(() => {
+    setCheckout({
+      ...checkout,
+      email,
+    });
+  }, [email]);
 
   return (
     <div className="check d-flex justify-content-center align-items-center vh-100 bg-red">
@@ -59,29 +70,10 @@ const CheckinToken = () => {
               onSubmit={methods.handleSubmit(onSubmit)}
               className="w-100 h-100 container"
             >
-              <div className="row w-100 mt-5 justify-content-center">
-                <Input
-                  name="token"
-                  placeholder="Senha de acesso"
-                  label={<Image className="mb-1" src={password} />}
-                  contextClassName="position-relative d-flex justify-content-center"
-                  labelClassName="position-absolute check-form-label"
-                  className="text-center check-form-input input-username"
-                />
-              </div>
-
-              <div className="row mt-5">
-                <div className="offset-2 col-8 d-flex justify-content-around">
-                  <Button
-                    variant="primary"
-                    className="p-3 text-white m-auto"
-                    type="submit"
-                    size="lg"
-                  >
-                    Confirmar
-                  </Button>
-                </div>
-              </div>
+              <StepWizard ref={stepWizard} className="overflow-hidden">
+                <Email email={checkout.email} />
+                <AccessCode access={checkout.code} />
+              </StepWizard>
             </Form>
           </FormProvider>
         </div>
@@ -98,4 +90,4 @@ const CheckinToken = () => {
   );
 };
 
-export default CheckinToken;
+export default Checkout;

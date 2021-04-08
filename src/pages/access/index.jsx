@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 
 import logo from "../../assets/images/handonkey.svg";
-import businessman from "../../assets/images/icons/businessman.svg"
-import businesswoman from "../../assets/images/icons/businesswoman.svg"
+import businessman from "../../assets/images/icons/businessman.svg";
+import businesswoman from "../../assets/images/icons/businesswoman.svg";
 import checkIn from "../../assets/images/icons/in.svg";
 import checkOut from "../../assets/images/icons/out.svg";
 
-const Access = (props) => {
+const Access = () => {
   return (
     <div className="access d-flex justify-content-center align-items-center bg-info">
       <div className="access-content d-flex flex-column justify-content-center align-items-center p-4">
@@ -19,15 +19,15 @@ const Access = (props) => {
           Controle de Ambientes Fisicos
         </h1>
         <div className="access-content-options d-flex">
-          <Link href="/checkin/email">
+          <Link href="/checkin">
             <a className="btn btn-primary d-flex justify-content-center align-items-center margin-bottom-responsive">
-              <img src={checkIn} alt="checkin icon" className="check-icon"/>
+              <img src={checkIn} alt="checkin icon" className="check-icon" />
               <div className="font-acess-button">Entrada</div>
             </a>
           </Link>
-          <Link href="/checkout/email">
+          <Link href="/checkout">
             <a className="btn btn-primary d-flex justify-content-center align-items-center">
-              <img src={checkOut} alt="checkin icon" className="check-icon"/>
+              <img src={checkOut} alt="checkin icon" className="check-icon" />
               <div className="font-acess-button">Saida</div>
             </a>
           </Link>

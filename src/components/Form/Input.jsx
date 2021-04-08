@@ -14,9 +14,9 @@ const Input = ({
   const { register, watch, setValue } = useFormContext();
 
   register(name);
-  const watchDescription = watch(name);
+  const watchField = watch(name);
 
-  const [valueInput, setValueInput] = useState(watchDescription);
+  const [valueInput, setValueInput] = useState(watchField);
 
   return (
     <div className={`input-context ${contextClassName}`}>
