@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
-import { api } from "../../../service/api";
+import { api } from "../../../../service/api";
 
 export default NextAuth({
   site: process.env.NEXT_PUBLIC_API_URL,
@@ -9,15 +9,15 @@ export default NextAuth({
     session: async (session, user) => {
       return Promise.resolve({ ...session, user });
     },
-    jwt: async (token, user, account, profile, isNewUser) => {
+    jwt: async (token, user) => {
       return Promise.resolve(user || token);
     },
   },
   pages: {
     signIn: "/",
     signOut: "/",
+    error: "/",
   },
-  // Configure one or more authentication providers
   providers: [
     Providers.Credentials({
       id: "domain-signin",
@@ -25,20 +25,32 @@ export default NextAuth({
       authorize: async (credentials) => {
         console.log(" SignIn = ", credentials);
         return api
-          .post("v1/auth", {
-            email: credentials.email,
-            password: credentials.password,
-          })
+          .post(
+            "v1/auth",
+            {
+              email: credentials.email,
+              password: credentials.password,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
           .then((response) => {
             const token = response.data.token;
             const user = response.data.user;
+            const access = response.data.access;
             if (user === null || token === null) {
+              console.log("User = ", user);
+              console.log("Token = ", token);
               return Promise.reject(new Error("invalid_credentials"));
             } else {
-              return Promise.resolve({ ...user, access_token: token });
+              return Promise.resolve({ ...user, token, ...access });
             }
           })
-          .catch(() => {
+          .catch((error) => {
+            console.log("error = ", error);
             return Promise.reject(new Error("invalid_credentials"));
           });
       },
