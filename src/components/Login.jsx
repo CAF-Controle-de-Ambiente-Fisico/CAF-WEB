@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Button, Form, Image } from "react-bootstrap";
 import { useForm, FormProvider } from "react-hook-form";
+import { getSession, getCsrfToken, signIn } from "next-auth/client";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Input from "../components/Form/Input";
 
@@ -11,30 +13,55 @@ import bgContet from "../assets/images/arte-wave.svg";
 import logo from "../assets/images/handonkey.svg";
 import user from "../assets/images/icons/user.svg";
 import password from "../assets/images/icons/password.svg";
-import api from "../../service/api";
+import { nextAuth } from "../../service/api";
 
 const Login = ({ firstStep, kindUser = "" }) => {
   const methods = useForm();
   const router = useRouter();
+  const [reCaptcha, setReCaptcha] = useState(false);
 
-  const onSubmit = (data) => {
-    api
-      .post("v1/auth", data)
-      .then((res) => {
-        console.log(res.data);
-        router.push('/dashboard')
-      })
-      .catch((error) => {
-        console.log("error:", error);
-        MySwal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Desculpe, houve um erro no preenchimento dos requisitos",
-        }).then(() => {
-          router.reload();
+  const handleRePCAPTCHA = () => setReCaptcha(true);
+
+  const onSubmit = async (data) => {
+    const csrfToken = await getCsrfToken();
+
+    if (reCaptcha) {
+      setLoading(true);
+      nextAuth
+        .post("api/auth/callback/domain-signin", {
+          ...data,
+          csrfToken,
+          callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/profile`,
+        })
+        .then((response) => {
+          if (response.request.responseURL.includes("Error")) {
+            MySwal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Email ou senha incorreto(s)",
+            });
+            setLoading(false);
+          } else {
+            MySwal.fire({
+              icon: "success",
+              title: "Tudo certo!",
+              text: "Login realizado com sucesso",
+            }).then(() => {
+              router.push(`${process.env.NEXT_PUBLIC_SITE_URL}/profile`);
+            });
+            setLoading(false);
+          }
+        })
+        .catch((error) => {
+          MySwal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo deu errado",
+          });
+          setLoading(false);
         });
-      });
-  }
+    }
+  };
 
   return (
     <div className="login d-flex ">
@@ -74,6 +101,13 @@ const Login = ({ firstStep, kindUser = "" }) => {
               labelClassName="position-absolute login-form-label"
               className="text-center login-form-input input-password"
             />
+
+            <div className="d-flex justify-content-center mb-3">
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
+                onChange={handleRePCAPTCHA}
+              />
+            </div>
 
             <Button
               className="login-form-button mt-3 badge badge-pill"
