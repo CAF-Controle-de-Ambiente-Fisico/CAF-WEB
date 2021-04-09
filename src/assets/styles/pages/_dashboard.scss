@@ -1,0 +1,110 @@
+$primary: #1d3557;
+$primary-light: #bed2ef;
+$dashboard-bg: #f6f6f6;
+$dashboard-grey: #b6c0cd;
+$green: #1cc88a;
+
+$box-shadow-default: 0px 0px 10px
+  rgba(
+    $color: #000000,
+    $alpha: 0.8,
+  );
+
+.divider-y {
+  height: 80%;
+  background-color: $primary;
+  width: 2px;
+}
+
+.divider-x {
+  width: 94%;
+  background-color: $primary;
+  height: 2px;
+}
+
+.dashboard-box {
+  height: 100vh;
+  width: 100%;
+  background-color: $dashboard-bg;
+
+  .dashboard-header {
+    width: 100%;
+    height: 60px;
+    background-color: $dashboard-grey;
+    padding: 8px 0px;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    .dashboard-header-logo {
+      position: absolute;
+      left: 0px;
+    }
+
+    .dashboard-header-app-name {
+      font-size: 40px;
+      color: $primary;
+      font-weight: bold;
+    }
+
+    .dashboard-header-user-info {
+      height: 100%;
+      font-size: 14px;
+      font-weight: bold;
+      color: $primary;
+
+      position: absolute;
+      right: 0px;
+    }
+  }
+
+  .dashboard-body {
+    width: 800px;
+    min-width: 330px;
+    padding: 25px 35px;
+    background-color: $dashboard-grey;
+    box-shadow: $box-shadow-default;
+
+    .dashboard-body-current-code {
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: $box-shadow-default;
+
+      border-left: 8px solid $green;
+
+      .text-code-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: $primary;
+      }
+
+      .code-value {
+        max-width: 330px;
+        min-width: 220px;
+        padding: 20px 30px;
+        height: auto;
+        background-color: $primary;
+        border-radius: 5px;
+
+        .copy-button {
+          border: 0px;
+          background-color: rgba($color: #000000, $alpha: 0);
+        }
+
+        .code-value-text {
+          text-align: center;
+
+          font-size: 18px;
+          font-weight: bold;
+          color: $primary-light;
+
+          border: 0px;
+          background-color: rgba($color: #000000, $alpha: 0);
+        }
+      }
+    }
+  }
+}
