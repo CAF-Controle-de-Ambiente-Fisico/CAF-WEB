@@ -14,7 +14,7 @@ import checkOut from "../../assets/images/icons/saida-icon-blue.svg";
 import box from "../../assets/images/icons/artbox.svg";
 import logo from "../../assets/images/handonkey.svg";
 
-import api from "../../../service/api";
+import { api } from "../../../service/api";
 
 const Checkout = () => {
   const stepWizard = useRef();

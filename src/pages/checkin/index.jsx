@@ -14,7 +14,7 @@ import checkIn from "../../assets/images/icons/Entrada-azul.svg";
 import box from "../../assets/images/icons/artbox.svg";
 import logo from "../../assets/images/handonkey.svg";
 
-import api from "../../../service/api";
+import { api } from "../../../service/api";
 
 const Checkin = () => {
   const stepWizard = useRef();

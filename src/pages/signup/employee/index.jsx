@@ -13,7 +13,7 @@ import Input from "../../../components/Form/Input";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
-import api from "../../../../service/api";
+import { api } from "../../../../service/api";
 
 const Singup = () => {
   const [image, setImage] = useState();

@@ -9,7 +9,7 @@ import ReactLoading from "react-loading";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import Input from "../../../components/Form/Input";
-import api from "../../../../service/api";
+import { api } from "../../../../service/api";
 
 const Confirmation = () => {
   const methods = useForm();

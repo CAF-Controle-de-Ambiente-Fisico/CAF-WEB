@@ -4,22 +4,22 @@ import { useRouter } from "next/router";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button, Form, Image, Alert } from "react-bootstrap";
 import Dropzone from "react-dropzone";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import ReactLoading from 'react-loading';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import ReactLoading from "react-loading";
 
 import translate from "../../../assets/scripts/util/translate";
 import Input from "../../../components/Form/Input";
 import bgContet from "../../../assets/images/arte-wave.svg";
 import logo from "../../../assets/images/handonkey.svg";
 import avatar from "../../../assets/images/avatar.svg";
-import api from "../../../../service/api"
+import { api } from "../../../../service/api";
 
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
   const [loading, setLoading] = useState(false);
-  const MySwal = withReactContent(Swal)
+  const MySwal = withReactContent(Swal);
   const router = useRouter();
 
   const user = router.pathname.split("/")[2];
@@ -56,18 +56,21 @@ const Singup = () => {
   }, [image]);
 
   useEffect(() => {
-    setLoading(false)
-  },[])
+    setLoading(false);
+  }, []);
 
   return (
     <>
-    {
-      loading ?
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <ReactLoading type="spinningBubbles" color="#1d3557" height={200} width={200} />
-      </div>
-      :
-      sendEmail ? (
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center vh-100">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#1d3557"
+            height={200}
+            width={200}
+          />
+        </div>
+      ) : sendEmail ? (
         <div className="confirmation d-flex justify-content-center align-items-center bg-info vh-100">
           <div className="confirmation-content d-flex flex-wrap flex-column p-4">
             <div className="confirmation-content-logo w-100 d-flex justify-content-center flex-wrap align-items-center">
@@ -192,11 +195,9 @@ const Singup = () => {
                 </Form>
               </FormProvider>
             </div>
-
           </div>
         </div>
-      )
-    }
+      )}
     </>
   );
 };
