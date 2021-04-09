@@ -1,7 +1,8 @@
 import React from "react";
+import { Image, Button } from "react-bootstrap";
 import logoHeader from "./../../assets/images/handonkey.svg";
 import userIcon from "./../../assets/images/icons/user-icon.svg";
-// import copyIcon from "./../../assets/images/icons/copy.svg";
+import copyIcon from "./../../assets/images/icons/copy.svg";
 
 function index() {
   // const copyCode = () => {
@@ -17,7 +18,7 @@ function index() {
     <div className="dashboard-box d-flex justify-content-center align-items-center">
       <div className="dashboard-header d-flex justify-content-center align-items-center">
         <div className="dashboard-header-logo ml-2">
-          <img src={logoHeader} height="50px" />
+          <Image src={logoHeader} height="50px" />
         </div>
 
         <div className="dashboard-header-app-name">CAF</div>
@@ -26,7 +27,7 @@ function index() {
           <div>Fulano</div>
           <div className="divider-y ml-2 mr-2"></div>
           <div className="h-100 d-flex justify-content-center align-items-center">
-            <img src={userIcon} height="35px" />
+            <Image src={userIcon} height="35px" />
           </div>
         </div>
       </div>
@@ -36,12 +37,15 @@ function index() {
           <div className="text-code-title">Código ativo</div>
           <div className="divider-x mt-3 mb-3"></div>
           <div className="code-value ml-2 mr-2 d-flex justify-content-center align-items-center">
-            {/* <button className="copy-button mr-2">
-              <img height="25" src={copyIcon} alt="" />
-            </button> */}
             <div className="code-value-text">
-              aa23dfe32aa23dfe32aa23dfe32aa23dfe32aa23dfe32aa23dfe32"
+              aa23dfe32aa23dfe32aa23dfe32aa23dfe32aa23dfe32aa23dfe32
             </div>
+          </div>
+          <div className="mt-2">
+            <Button onClick={() => {}} className="copy-button d-flex">
+              <Image height="25" src={copyIcon} alt="" />
+              <div className="copy-button-text ml-2">Copiar código</div>
+            </Button>
           </div>
         </div>
       </div>
