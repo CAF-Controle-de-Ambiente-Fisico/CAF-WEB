@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import logoHeader from "./../../assets/images/handonkey.svg";
 import userIcon from "./../../assets/images/icons/user-icon.svg";
 import copyIcon from "./../../assets/images/icons/copy.svg";
+import { api } from "./../../../service/api"
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -15,11 +16,28 @@ const Dashboard = () => {
 
   const notify = () => toast.success("Código Copiado");
 
+  const getNewCode = () => {
+    console.log(user.id);
+    api.get(`v1/code/${user.id}`)
+    .then(res => {
+      setUser({...user, code: res.data.access.code})
+      toast.success("Código Ativo Atualizado")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
   useEffect(async () => {
-    const session = await getSession();
-    console.log(session);
-    setUser(session.user);
-    setLoading(false);
+  const session = await getSession();
+  console.log(session.user)
+  setUser({
+    id: session.user.user_id,
+    username: session.user.username,
+    email: session.user.email,
+    code: session.user.code,
+  });
+  setLoading(false);
   }, []);
 
   return (
@@ -80,6 +98,8 @@ const Dashboard = () => {
                   <Toaster />
                 </Button>
               </div>
+
+              <Button onClick={() => getNewCode()}>Verificar código</Button>
             </div>
           </div>
         </div>
