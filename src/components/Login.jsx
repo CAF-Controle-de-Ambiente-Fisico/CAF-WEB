@@ -59,7 +59,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
               title: "Tudo certo!",
               text: "Login realizado com sucesso",
             }).then(() => {
-              router.push(`${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`);
+              router.push("/dashboard");
             });
           }
           setLoading(false);
@@ -86,7 +86,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
           title: "Sessão ativa",
           text: "Você já fez login no sistema",
         }).then(() => {
-          router.push(`${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`);
+          router.push("/dashboard");
         });
       }
     } else setIsLogged(false);
