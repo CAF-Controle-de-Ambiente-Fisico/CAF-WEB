@@ -36,6 +36,7 @@ const Dashboard = () => {
     username: session.user.username,
     email: session.user.email,
     code: session.user.code,
+    photo: session.user.photo
   });
   setLoading(false);
   }, []);
@@ -52,16 +53,19 @@ const Dashboard = () => {
           />
         </div>
       ) : (
-        <div className="dashboard-box d-flex justify-content-center align-items-center">
-          <div className="dashboard-header d-flex justify-content-center align-items-center">
-            <div className="dashboard-header-logo ml-2">
-              <Image src={logoHeader} height="50px" />
+        <div className="dashboard d-flex justify-content-center flex-wrap vh-100 bg-gray-light">
+          <div className="dashboard-header w-100 d-flex justify-content-center align-items-center bg-info shadow rounded">
+            <div className="flex-grow-1">
+              <Image src={logoHeader} />
             </div>
-
-            <div className="dashboard-header-app-name">CAF</div>
-
-            <div className="dashboard-header-user-info mr-2 d-flex align-items-center">
+            <div className="d-flex justify-content-center align-items-center">
+              <Image src={ user.photo ? user.photo : userIcon} />
+              <strong className="mx-4">{user.username}</strong>
+            </div>
+            <div className="d-flex justify-content-end flex-grow-1">
               <Button
+              className="mr-4"
+              variant="danger"
                 onClick={() => {
                   signOut({
                     callbackUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
@@ -70,37 +74,25 @@ const Dashboard = () => {
               >
                 Sair
               </Button>
-              <div>{user.username}</div>
-              <div className="divider-y ml-2 mr-2"></div>
-              <div className="h-100 d-flex justify-content-center align-items-center">
-                <Image src={userIcon} height="35px" />
-              </div>
             </div>
           </div>
+          <Toaster />
 
-          <div className="dashboard-body ml-3 mr-3">
-            <div className="dashboard-body-current-code d-flex flex-column justify-content-center align-items-center">
-              <div className="text-code-title">Código ativo</div>
-              <div className="divider-x mt-3 mb-3"></div>
-              <div className="code-value ml-2 mr-2 d-flex justify-content-center align-items-center">
-                <div className="code-value-text">{user.code}</div>
-              </div>
-              <div className="mt-2">
-                <Button
-                  onClick={() => {
+          <div className="dashboard-body shadow-lg card p-3 d-flex flex-column justify-content-center align-items-center">
+              <p className="w-100 text-center p-3 bg-primary color-white rounded">Código ativo</p>
+              <div className="code-value border-bottom my-4 p-2" onClick={() => {
                     copy(user.code);
                     notify();
-                  }}
-                  className="copy-button d-flex"
+                  }}>
+                <strong>{user.code}</strong>
+                <span
+                  className="color-dark ml-3"
+                  
                 >
                   <Image height="25" src={copyIcon} alt="" />
-                  <div className="copy-button-text ml-2">Copiar código</div>
-                  <Toaster />
-                </Button>
+                </span>
               </div>
-
               <Button onClick={() => getNewCode()}>Verificar código</Button>
-            </div>
           </div>
         </div>
       )}
