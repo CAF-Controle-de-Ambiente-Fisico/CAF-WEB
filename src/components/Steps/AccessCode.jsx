@@ -11,7 +11,7 @@ const AccessCode = ({ code, ...rest }) => {
       <div className="row w-100 mt-5 justify-content-center">
         <Input
           name="code"
-          placeholder="Senha de acesso"
+          placeholder="Código de acesso"
           label={<Image className="mb-1" src={password} />}
           contextClassName="position-relative d-flex justify-content-center"
           labelClassName="position-absolute check-form-label"
