@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import { cpfMask } from "../../assets/scripts/util/cpfMask";
 
 const Input = ({
   type = "text",
@@ -16,7 +17,7 @@ const Input = ({
   register(name);
   const watchField = watch(name);
 
-  const [valueInput, setValueInput] = useState(watchField);
+  const [valueInput, setValueInput] = useState(watchField ? watchField : "");
 
   return (
     <div className={`input-context ${contextClassName}`}>
@@ -34,8 +35,10 @@ const Input = ({
         id={name}
         value={valueInput}
         onChange={(event) => {
-          setValueInput(setValueInput);
           setValue(name, event.target.value);
+          setValueInput(
+            name === "cpf" ? cpfMask(event.target.value) : event.target.value
+          );
         }}
       />
     </div>
