@@ -128,7 +128,7 @@ const Login = ({ firstStep, kindUser = "" }) => {
                 <Input
                   name="email"
                   type="email"
-                  placeholder="Usuário ou email"
+                  placeholder="Digite o email cadastrado"
                   label={<Image className="mb-1" src={user} />}
                   contextClassName="position-relative d-flex justify-content-center"
                   labelClassName="position-absolute login-form-label"
