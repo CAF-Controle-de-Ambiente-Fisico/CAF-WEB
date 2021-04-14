@@ -26,9 +26,21 @@ const Singup = () => {
 
   const methods = useForm();
   const onSubmit = (data) => {
+    const formData = new FormData();
     setLoading(true);
+    console.log(data);
+    const avatar = new Blob([data.photo], { type: "image/png" });
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("registration", data.registration);
+    formData.append("photo", avatar);
+    console.log(avatar);
     api
-      .post(`v1/${user}`, data)
+      .post(`v1/${user}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setSendEmail(res.data.user.email);
@@ -120,6 +132,7 @@ const Singup = () => {
                 <Form
                   onSubmit={methods.handleSubmit(onSubmit)}
                   className="w-100 d-flex flex-column align-items-center flex-wrap"
+                  enctype="multipart/form-data"
                 >
                   <Input
                     required
