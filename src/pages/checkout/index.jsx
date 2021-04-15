@@ -32,8 +32,8 @@ const Checkout = () => {
         console.log(res);
         MySwal.fire({
           icon: "success",
-          title: "Bem vindo ao TRTRN-21",
-          text: "Saida registrada com Sucesso!",
+          title: "Volte sempre ao TRTRN-21",
+          text: "Sua saida foi registrada com sucesso!",
         }).then(() => {
           router.push("/access");
         });
