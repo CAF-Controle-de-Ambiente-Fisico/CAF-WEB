@@ -4,6 +4,21 @@
     height: 6.25rem;
   }
 
+  .dashboard-user {
+    align-self: flex-start;
+
+    .dashboard-user-avatar {
+      width: 11.5rem;
+      height: 11.5rem;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .dashboard-image {
+    display: none;
+  }
+
   .dashboard-body {
     height: 18.75rem;
     width: 70%;
@@ -13,6 +28,25 @@
 
     &:hover {
       background-color: $gray-300;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .dashboard {
+    .dashboard-user {
+      display: none;
+      
+      .dashboard-user-avatar {
+        width: 8.5rem;
+        height: 8.5rem;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+
+    .dashboard-image {
+      display: block;
     }
   }
 }
