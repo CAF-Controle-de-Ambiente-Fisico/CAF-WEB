@@ -26,15 +26,13 @@ const Singup = () => {
 
   const methods = useForm();
   const onSubmit = (data) => {
-    const formData = new FormData();
     setLoading(true);
-    console.log(data);
+    const formData = new FormData();
     const avatar = new Blob([data.photo], { type: "image/png" });
     formData.append("username", data.username);
     formData.append("email", data.email);
     formData.append("registration", data.registration);
     formData.append("photo", avatar);
-    console.log(avatar);
     api
       .post(`v1/${user}`, formData, {
         headers: {
@@ -132,7 +130,7 @@ const Singup = () => {
                 <Form
                   onSubmit={methods.handleSubmit(onSubmit)}
                   className="w-100 d-flex flex-column align-items-center flex-wrap"
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                 >
                   <Input
                     required
