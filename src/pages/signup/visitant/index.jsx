@@ -18,7 +18,7 @@ import { api } from "../../../../service/api";
 const Singup = () => {
   const [image, setImage] = useState();
   const [sendEmail, setSendEmail] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const MySwal = withReactContent(Swal);
   const router = useRouter();
 
@@ -27,8 +27,19 @@ const Singup = () => {
   const methods = useForm();
   const onSubmit = (data) => {
     setLoading(true);
+    const formData = new FormData();
+    const avatar = new Blob([data.photo], { type: "image/png" });
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("cpf", data.cpf);
+    formData.append("photo", avatar);
+    console.log(formData);
     api
-      .post(`v1/${user}`, data)
+      .post(`v1/${user}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setSendEmail(res.data.user.email);
@@ -120,22 +131,23 @@ const Singup = () => {
                 <Form
                   onSubmit={methods.handleSubmit(onSubmit)}
                   className="w-100 d-flex flex-column align-items-center flex-wrap"
+                  encType="multipart/form-data"
                 >
                   <Input
                     required
                     name="username"
                     placeholder="Nome de usuário"
                     contextClassName="position-relative mt-4 d-flex justify-content-center"
-                    className="signup-form-input input-username"
+                    className="signup-form-input"
                   />
 
                   <Input
                     required
                     name="cpf"
                     type="text"
-                    placeholder="cpf"
+                    placeholder="CPF"
                     contextClassName="position-relative mt-4 d-flex justify-content-center"
-                    className="signup-form-input input-password"
+                    className="signup-form-input"
                   />
 
                   <Input
@@ -144,7 +156,7 @@ const Singup = () => {
                     required
                     placeholder="Digite seu melhor email"
                     contextClassName="position-relative mt-4 d-flex justify-content-center"
-                    className="signup-form-input input-username"
+                    className="signup-form-input"
                   />
 
                   <Dropzone
